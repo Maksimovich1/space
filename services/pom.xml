@@ -18,7 +18,12 @@
             <artifactId>repositories</artifactId>
             <version>0.0.1</version>
         </dependency>
-    </dependencies>
 
+        <dependency>
+            <groupId>by.mmb</groupId>
+            <artifactId>security</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+    </dependencies>
 
 </project>
