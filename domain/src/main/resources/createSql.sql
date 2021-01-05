@@ -52,3 +52,24 @@ CREATE TABLE IF NOT EXISTS user_params
 
 
 INSERT INTO `test`.`cars` (`id`, `number_car`, `count_place`, `date_reg`, `status`, `driver_id`) VALUES ('1', '1221AB-1', '16', STR_TO_DATE('1-01-2012', '%d-%m-%Y'), '1', '1');
+
+CREATE TABLE IF NOT EXISTS external_codes
+(
+    externalCode INT PRIMARY KEY ,
+    messageRU    VARCHAR(255) NOT NULL
+) ENGINE = INNODB;
+
+
+CREATE TABLE IF NOT EXISTS internal_codes
+(
+    internalCode INT PRIMARY KEY,
+    message    VARCHAR(255) NOT NULL,
+    externalId INT NOT NULL,
+    foreign key (externalId) references external_codes (externalCode)
+) ENGINE = INNODB;
+
+
+insert into external_codes values (-9999, 'Ошибка на сервере');
+insert into external_codes values (-5555, 'Ошибка с соединением');
+insert into internal_codes values (-10111, 'Ошибка с соединением', -5555);
+

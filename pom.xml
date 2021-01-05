@@ -9,6 +9,7 @@
         <module>repositories</module>
         <module>web</module>
         <module>security</module>
+        <module>exception</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

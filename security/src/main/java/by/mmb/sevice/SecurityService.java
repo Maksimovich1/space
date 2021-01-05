@@ -1,9 +1,13 @@
 package by.mmb.sevice;
 
+import by.mmb.exception.AppsException;
 import by.mmb.model.User;
 
+/**
+ * @author andrew maksimovich
+ */
 public interface SecurityService {
-    User getCurrentUser();
+    User getCurrentUser() throws AppsException;
 
-    String getUserId();
+    String getUserId() throws AppsException;
 }

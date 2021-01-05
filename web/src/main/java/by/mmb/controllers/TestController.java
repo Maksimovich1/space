@@ -1,6 +1,7 @@
 package by.mmb.controllers;
 
 import by.mmb.dto.UserDTO;
+import by.mmb.exception.AppsException;
 import by.mmb.model.User;
 import by.mmb.sevice.SecurityService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class TestController {
     }
 
     @GetMapping("/getUserDetail")
-    public UserDTO avoid() {
+    public UserDTO avoid() throws AppsException {
         User currentUser = securityService.getCurrentUser();
         return UserDTO.builder()
                 .userName(currentUser.getName())
