@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -12,13 +14,22 @@ import lombok.NoArgsConstructor;
 public class Car {
 
     private long id;
+    /**
+     * analytic type = 2
+     */
     private long brandId;
+    /**
+     * analytic type = 3
+     */
     private long modelId;
+
     private String numberCar;
     private int countPlace;
     private int driverId;
     /**
-     * status car work(1) or free(2) or not available(3)
+     * analytic type = 1
      */
     private int status;
+
+    private LocalDateTime dateReg;
 }

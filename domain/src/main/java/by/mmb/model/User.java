@@ -3,6 +3,7 @@ package by.mmb.model;
 import lombok.Builder;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -10,9 +11,17 @@ import java.util.List;
 public class User {
 
     private String id;
-    private String nickName;
-    private String name;
-    private String email;
+    private LocalDateTime dateReg;
+    /**
+     * analytic type = 6
+     */
+    private int status;
+    private String login;
+    private String password;
+    /**
+     * analytic type = 4
+     */
+    private int type;
 
     private List<AdditionalParam> additionalParam;
 }
