@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class ICarService implements CarService {
 
+    private final CarRepository carRepository;
+
     @Autowired
-    private CarRepository carRepository;
+    public ICarService(CarRepository carRepository) {
+        this.carRepository = carRepository;
+    }
 
     @Override
     public CarDTO getCarById(long id) {
@@ -30,5 +34,15 @@ public class ICarService implements CarService {
     @Override
     public List<CarDTO> getCardsByRouteId(long id) {
         return null;
+    }
+
+    @Override
+    public List<CarDTO> getAllCarUserById(long idUser) {
+        return null;
+    }
+
+    @Override
+    public boolean update(CarDTO carDTO) {
+        return false;
     }
 }

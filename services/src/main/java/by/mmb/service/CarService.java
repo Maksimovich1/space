@@ -11,4 +11,8 @@ public interface CarService {
     long saveNewCar(CarDTO carDTO);
 
     List<CarDTO> getCardsByRouteId(long id);
+
+    List<CarDTO> getAllCarUserById(long idUser);
+
+    boolean update(CarDTO carDTO);
 }
