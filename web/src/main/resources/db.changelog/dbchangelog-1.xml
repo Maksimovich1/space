@@ -1,0 +1,178 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1" author="Andrew">
+        <!---->
+        <createTable tableName="analytic_type" remarks="Тип аналитики">
+
+            <column name="id_type" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+
+            <column name="code_analytic_type" type="int" remarks="кастомное значение типа">
+                <constraints unique="true" nullable="false"/>
+            </column>
+
+            <column name="description" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+        
+        <createIndex tableName="analytic_type" indexName="idtypex">
+            <column descending="true" name="code_analytic_type"/>
+        </createIndex>
+        <!---->
+        <createTable tableName="analytic_value" remarks="Значение типов аналитики">
+            <column name="id_value" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="code_analytic_type" type="int">
+                <constraints nullable="false"
+                             foreignKeyName="fk_analytic_value_analytic_type"
+                             references="analytic_type(code_analytic_type)"/>
+            </column>
+            <column name="code_analytic_value" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="relation1_t" type="int" remarks="Связь с значениями аналитики прим бренд-модель">
+                <constraints nullable="true"/>
+            </column>
+            <column name="relation1_v" type="int" remarks="доп связь">
+                <constraints nullable="true"/>
+            </column>
+            <column name="relation2_t" type="int" remarks="Связь с значениями аналитики прим бренд-модель">
+                <constraints nullable="true"/>
+            </column>
+            <column name="relation2_v" type="int" remarks="доп связь">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <createIndex tableName="analytic_value" indexName="code_analytic_valuex">
+            <column name="code_analytic_value" descending="true"/>
+        </createIndex>
+        <!--таблица пользователей-->
+        <createTable tableName="users"
+                     remarks="Таблица для хранения все пользователей в системе">
+            <column name="id" type="int" autoIncrement="true" remarks="ид пользователя">
+                <constraints unique="true" nullable="false" primaryKey="true"/>
+            </column>
+            <column name="date_reg" type="DATE" remarks="Дата регистрации в системе">
+                <constraints nullable="false"/>
+            </column>
+            <column name="analytic_value_id_status" type="INT"
+                    remarks="Статус в котором находится пользователь аналитика тип статуса аккаунта">
+                <constraints nullable="false"
+                             foreignKeyName="fk_users_analytic_value_id_status"
+                             references="analytic_value(code_analytic_value)"
+                />
+            </column>
+            <column name="login" type="varchar(255)" remarks="Логин пользователя в системе. Должен быть уникален">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)" remarks="Пароль">
+                <constraints nullable="false"/>
+            </column>
+            <column name="analytic_value_id_type" type="int" remarks="аналитика Тип аккаунта ">
+                <constraints nullable="false"
+                             foreignKeyName="fk_users_analytic_value_id_type"
+                             references="analytic_value(code_analytic_value)"
+                />
+            </column>
+
+        </createTable>
+        <!---->
+        <createTable tableName="cars">
+            <column name="id" type="int" autoIncrement="true" remarks="ИД машины">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="analytic_value_id_brand" type="int" remarks="аналитика Бренд машины">
+                <constraints nullable="false"
+                             foreignKeyName="fk_cars_analytic_value_id_brand"
+                             references="analytic_value(code_analytic_value)"
+                />
+            </column>
+            <column name="analytic_value_id_model" type="int" remarks="аналитика Модель машины">
+                <constraints nullable="false"
+                             foreignKeyName="fk_cars_analytic_value_id_model"
+                             references="analytic_value(code_analytic_value)"
+                />
+            </column>
+            <column name="analytic_value_id_status" type="int" remarks="аналитика Статус доступа автомобиля">
+                <constraints nullable="false"
+                             foreignKeyName="fk_cars_analytic_value_id_status"
+                             references="analytic_value(code_analytic_value)"
+                />
+            </column>
+            <column name="number_car" type="varchar(255)" remarks="Номер машины, должен быть уникальным">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="date_reg" type="date" remarks="Дата регистрации"/>
+            <column name="count_place" type="int" remarks="Количество мест (общее)"/>
+            <column name="driver_id" type="int" remarks="водитель ид пользователя">
+                <constraints nullable="false"
+                             foreignKeyName="fk_cars_driver_id"
+                             references="users(id)"
+                />
+            </column>
+            <column name="owner_id" type="int" remarks="Владелец ид пользователя">
+                <constraints nullable="false"
+                             foreignKeyName="fk_cars_owner_id"
+                             references="users(id)"
+                />
+            </column>
+        </createTable>
+        <!--Таблица параметров-->
+        <createTable tableName="user_params"
+                     remarks="Дополнительные параметры пользователей">
+            <column name="id" type="int" autoIncrement="true" remarks="Ид параметра">
+                <constraints nullable="false"
+                             primaryKey="true"
+                />
+            </column>
+            <column name="user_id" type="int" remarks="ИД пользователя кому принадлежит параметр">
+                <constraints nullable="false"
+                             foreignKeyName="fk_user_params_user_id"
+                             references="users(id)"
+                />
+            </column>
+            <column name="name_param" type="varchar(255)" remarks="Строковое имя параметра">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value_param" type="varchar(255)" remarks="Значение параметра">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <!--ошибки-->
+        <createTable tableName="external_codes" remarks="ошибки для выдачи наружу">
+            <column name="external_code" type="int" autoIncrement="true" remarks="код ошибки">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="message_ru" type="varchar(255)" remarks="Ошибка для пользователя"/>
+        </createTable>
+        <createTable tableName="internal_codes" remarks="Внутренние ошибки для логирования">
+            <column name="internal_code" type="int" autoIncrement="true" remarks="">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="message" type="varchar(255)" remarks="Текст для логирования внутри программы">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="external_id" type="int"
+                    remarks="ид внешней ошибки которую нужно отдать пользователю">
+                <constraints nullable="false"
+                             foreignKeyName="fk_internal_codes_external_codes"
+                             references="external_codes(external_code)"
+                />
+            </column>
+        </createTable>
+
+    </changeSet>
+
+</databaseChangeLog>

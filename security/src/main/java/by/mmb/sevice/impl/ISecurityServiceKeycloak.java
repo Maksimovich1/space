@@ -22,8 +22,7 @@ public class ISecurityServiceKeycloak implements SecurityService {
         log.trace("the token was successfully received");
         return User.builder()
                 .id(token.getSubject())
-                .name(token.getName())
-                .email(token.getEmail())
+                .login(token.getName())
                 .additionalParam(null)
                 .build();
     }

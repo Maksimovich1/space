@@ -127,6 +127,13 @@ values (2, 'Volvo');
 insert into analytic_value (type_id, description)
 values (2, 'Opel');
 
+insert into analytic_value (type_id, description)
+values (5, 'Открыт');
+insert into analytic_value (type_id, description)
+values (5, 'Удален');
+insert into analytic_value (type_id, description)
+values (5, 'Блокирован');
+
 insert into analytic_value (type_id, description)values (4, 'Перевозчик');
 insert into analytic_value (type_id, description)values (4, 'Водитель');
 insert into analytic_value (type_id, description)values (4, 'Заказчик');
@@ -136,8 +143,8 @@ insert into analytic_value (type_id, description, relation)values (3, 'Crafter',
 insert into analytic_value (type_id, description, relation)values (3, 'Zafira', 8);
 
 
-insert into users (date_reg, analytic_value_id_status, login, password, analytic_value_id_type)values (STR_TO_DATE('1-01-2012', '%d-%m-%Y'), 0, 'adrew', '1111', 13);
-insert into users (date_reg, analytic_value_id_status, login, password, analytic_value_id_type)values (STR_TO_DATE('1-08-2018', '%d-%m-%Y'), 0, 'jonh', '1111', 12);
+insert into users (date_reg, analytic_value_id_status, login, password, analytic_value_id_type)values (STR_TO_DATE('1-01-2012', '%d-%m-%Y'), 14, 'adrew', '1111', 13);
+insert into users (date_reg, analytic_value_id_status, login, password, analytic_value_id_type)values (STR_TO_DATE('1-08-2018', '%d-%m-%Y'), 14, 'jonh', '1111', 12);
 
 
 

@@ -26,7 +26,7 @@ public class TestController {
     public UserDTO avoid() throws AppsException {
         User currentUser = securityService.getCurrentUser();
         return UserDTO.builder()
-                .userName(currentUser.getName())
+                .userName(currentUser.getLogin())
                 .build();
     }
 

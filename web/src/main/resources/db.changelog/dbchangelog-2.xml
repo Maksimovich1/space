@@ -1,0 +1,186 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2" author="Andrew">
+        <insert tableName="external_codes">
+            <column name="external_code" value="-9999"/>
+            <column name="message_ru" value="Ошибка на сервере"/>
+        </insert>
+        <insert tableName="external_codes">
+            <column name="external_code" value="-5555"/>
+            <column name="message_ru" value="Ошибка с соединением со сторонним сервером"/>
+        </insert>
+        <insert tableName="internal_codes">
+            <column name="internal_code" value="-10111"/>
+            <column name="message" value="Ошибка с соединением со сторонним сервером"/>
+            <column name="external_id" value="-5555"/>
+        </insert>
+
+        <insert tableName="analytic_type">
+            <column name="description" value="Тип документа"/>
+            <column name="code_analytic_type" value="100"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="100"/>
+            <column name="code_analytic_value" value="1"/>
+            <column name="description" value="Паспорт"/>
+        </insert>
+
+<!--
+ -->
+        <insert tableName="analytic_type">
+            <column name="description" value="Бренд транспорта"/>
+            <column name="code_analytic_type" value="600"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="600"/>
+            <column name="code_analytic_value" value="1"/>
+            <column name="description" value="Mercedes"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_value" value="2"/>
+            <column name="code_analytic_type" value="600"/>
+            <column name="description" value="Volkswagen"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_value" value="3"/>
+            <column name="code_analytic_type" value="600"/>
+            <column name="description" value="Volvo"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_value" value="4"/>
+            <column name="code_analytic_type" value="600"/>
+            <column name="description" value="Opel"/>
+        </insert>
+<!--
+-->
+        <insert tableName="analytic_type">
+            <column name="description" value="Статус доступа автомобиля"/>
+            <column name="code_analytic_type" value="200"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="200"/>
+            <column name="code_analytic_value" value="1"/>
+            <column name="description" value="Недоступна (на ремонте)"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="200"/>
+            <column name="code_analytic_value" value="2"/>
+            <column name="description" value="Недоступна (отпуск)"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="200"/>
+            <column name="code_analytic_value" value="3"/>
+            <column name="description" value="Доступна"/>
+        </insert>
+
+<!--
+-->
+        <insert tableName="analytic_type">
+            <column name="description" value="Модель транспорта"/>
+            <column name="code_analytic_type" value="300"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="300"/>
+            <column name="code_analytic_value" value="1"/>
+            <column name="description" value="Crafter"/>
+            <column name="relation1_t" value="600"/>
+            <column name="relation1_v" value="1"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="300"/>
+            <column name="code_analytic_value" value="2"/>
+            <column name="description" value="Zafira"/>
+            <column name="relation1_t" value="600"/>
+            <column name="relation1_v" value="4"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="300"/>
+            <column name="code_analytic_value" value="3"/>
+            <column name="description" value="Sprinter"/>
+            <column name="relation1_t" value="600"/>
+            <column name="relation1_v" value="2"/>
+        </insert>
+        <!--
+            -->
+        <insert tableName="analytic_type">
+            <column name="description" value="Тип аккаунта"/>
+            <column name="code_analytic_type" value="400"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="400"/>
+            <column name="description" value="Перевозчик"/>
+            <column name="code_analytic_value" value="1"/>
+
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="400"/>
+            <column name="code_analytic_value" value="2"/>
+            <column name="description" value="Водитель"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_value" value="3"/>
+            <column name="code_analytic_type" value="400"/>
+            <column name="description" value="Заказчик"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_value" value="4"/>
+            <column name="code_analytic_type" value="400"/>
+            <column name="description" value="Администратор"/>
+        </insert>
+        <!--
+          -->
+        <insert tableName="analytic_type">
+            <column name="description" value="Тип статуса аккаунта"/>
+            <column name="code_analytic_type" value="500"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_type" value="500"/>
+            <column name="code_analytic_value" value="1"/>
+            <column name="description" value="Открыт"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_value" value="2"/>
+            <column name="code_analytic_type" value="400"/>
+            <column name="description" value="Блокирован"/>
+        </insert>
+        <insert tableName="analytic_value">
+            <column name="code_analytic_value" value="3"/>
+            <column name="code_analytic_type" value="400"/>
+            <column name="description" value="Удален"/>
+        </insert>
+<!--
+-->
+        <insert tableName="users">
+            <column name="date_reg" valueDate="now()"/>
+            <column name="analytic_value_id_status" value="1"/>
+            <column name="login" value="admin"/>
+            <column name="password" value="1111"/>
+            <column name="analytic_value_id_type" value="4"/>
+        </insert>
+
+        <insert tableName="users">
+            <column name="date_reg" valueDate="now()"/>
+            <column name="analytic_value_id_status" value="1"/>
+            <column name="login" value="user"/>
+            <column name="password" value="1111"/>
+            <column name="analytic_value_id_type" value="3"/>
+        </insert>
+
+        <insert tableName="cars">
+            <column name="analytic_value_id_brand" value="1"/>
+            <column name="analytic_value_id_model" value="1"/>
+            <column name="analytic_value_id_status" value="3"/>
+            <column name="number_car" value="AB1111-1"/>
+            <column name="count_place" value="16"/>
+            <column name="date_reg" valueDate="now()"/>
+            <column name="driver_id" value="2"/>
+            <column name="owner_id" value="2"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
