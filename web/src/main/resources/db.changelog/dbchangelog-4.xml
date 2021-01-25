@@ -1,0 +1,129 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:liquibase="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="4" author="Andrew" labels="qwe4">
+        <liquibase:tagDatabase tag="qwe2"/>
+        <!--
+        -->
+        <createTable tableName="cargo" remarks="Таблица грузов">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name_cargo" type="varchar(255)" remarks="Имя груза"/>
+            <column name="weight_kg" type="INT" remarks="Вес в килошраммах"/>
+            <column name="length_sm" type="INT" remarks="длина в свнтиметрах"/>
+            <column name="width_sm" type="INT" remarks="ширина в сантиметрах"/>
+            <column name="height" type="INT" remarks="Высота в сантиметрах"/>
+        </createTable>
+        <!--
+        -->
+        <createTable tableName="city" remarks="Города">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name_city" type="varchar(255)" remarks="Название населенного пункта">
+                <constraints nullable="false"/>
+            </column>
+            <column name="analytic_value_id_district" type="INT"
+                    remarks="Область, если это районыый город то район не указывается">
+                <constraints nullable="true"
+                             foreignKeyName="FK_city_analytic_value_id"
+                             references="analytic_value(code_analytic_value)"/>
+            </column>
+            <column name="latitude" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="longitude" type="varchar(255)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <!--
+        -->
+        <createTable tableName="request">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="INT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_request_user_id"
+                             references="users(id)"/>
+            </column>
+            <column name="cargo_id" type="INT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_request_cargo_id"
+                             references="cargo(id)"
+                />
+            </column>
+            <column name="city_from" type="INT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_request_from_city_id"
+                             references="city(id)"/>
+            </column>
+            <column name="city_to" type="INT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_request_to_city_id"
+                             references="city(id)"/>
+            </column>
+            <column name="count_km" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="date_reg" type="DATETIME(3)" defaultValueDate="NOW(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="date_refresh" type="DATETIME(3)" defaultValueDate="NOW(3)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--
+        -->
+        <createTable tableName="request_params" remarks="Доп параметры заявки">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false"
+                             primaryKey="true"/>
+            </column>
+            <column name="request_id" type="int">
+                <constraints nullable="false"
+                             foreignKeyName="fk_request_params_request_id"
+                             references="request(id)"/>
+            </column>
+            <column name="name_param" type="varchar(255)" remarks="Строковое имя параметра">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value_param" type="varchar(255)" remarks="Значение параметра">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <!--
+        -->
+        <createTable tableName="cargo_params" remarks="Доп параметры груза">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false"
+                             primaryKey="true"/>
+            </column>
+            <column name="cargo_id" type="int">
+                <constraints nullable="false"
+                             foreignKeyName="fk_cargo_params_cargo_id"
+                             references="cargo(id)"/>
+            </column>
+            <column name="name_param" type="varchar(255)" remarks="Строковое имя параметра">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value_param" type="varchar(255)" remarks="Значение параметра">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <rollback>
+            <dropTable tableName="cargo_params"/>
+            <dropTable tableName="request_params"/>
+            <dropTable tableName="request"/>
+            <dropTable tableName="city"/>
+            <dropTable tableName="cargo"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

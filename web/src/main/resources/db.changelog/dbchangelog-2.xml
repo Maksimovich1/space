@@ -1,10 +1,11 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:liquibase="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
 	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="2" author="Andrew">
+    <changeSet id="2" author="Andrew" labels="qwe2">
         <insert tableName="external_codes">
             <column name="external_code" value="-9999"/>
             <column name="message_ru" value="Ошибка на сервере"/>
@@ -181,6 +182,16 @@
             <column name="owner_id" value="2"/>
         </insert>
 
+        <rollback>
+            <delete tableName="cars"/>
+            <delete tableName="users"/>
+            <delete tableName="analytic_value"/>
+            <delete tableName="analytic_type"/>
+            <delete tableName="internal_codes"/>
+            <delete tableName="external_codes"/>
+        </rollback>
+
+        <liquibase:tagDatabase tag="qwe1"/>
     </changeSet>
 
 </databaseChangeLog>

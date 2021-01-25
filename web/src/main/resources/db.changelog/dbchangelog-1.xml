@@ -173,6 +173,15 @@
             </column>
         </createTable>
 
+        <rollback>
+            <dropTable tableName="internal_codes"/>
+            <dropTable tableName="external_codes"/>
+            <dropTable tableName="user_params"/>
+            <dropTable tableName="cars"/>
+            <dropTable tableName="users"/>
+            <dropTable tableName="analytic_value"/>
+            <dropTable tableName="analytic_type"/>
+        </rollback>
     </changeSet>
 
 </databaseChangeLog>

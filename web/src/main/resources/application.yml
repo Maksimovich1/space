@@ -8,3 +8,4 @@ spring:
     password: 1111
   liquibase:
     change-log: classpath:db.changelog/changelog-master.xml
+    enabled: false
