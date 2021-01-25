@@ -26,7 +26,7 @@ public class Cargo {
     /**
      * вес
      */
-    private double weight;
+    private int weight;
     /**
      * длина
      */

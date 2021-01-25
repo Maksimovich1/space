@@ -9,19 +9,19 @@
         <!--
         -->
         <createTable tableName="cargo" remarks="Таблица грузов">
-            <column name="id" type="int" autoIncrement="true">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name_cargo" type="varchar(255)" remarks="Имя груза"/>
             <column name="weight_kg" type="INT" remarks="Вес в килошраммах"/>
             <column name="length_sm" type="INT" remarks="длина в свнтиметрах"/>
             <column name="width_sm" type="INT" remarks="ширина в сантиметрах"/>
-            <column name="height" type="INT" remarks="Высота в сантиметрах"/>
+            <column name="height_sm" type="INT" remarks="Высота в сантиметрах"/>
         </createTable>
         <!--
         -->
         <createTable tableName="city" remarks="Города">
-            <column name="id" type="INT" autoIncrement="true">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name_city" type="varchar(255)" remarks="Название населенного пункта">
@@ -43,7 +43,7 @@
         <!--
         -->
         <createTable tableName="request">
-            <column name="id" type="INT" autoIncrement="true">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="user_id" type="INT">
@@ -51,24 +51,29 @@
                              foreignKeyName="fk_request_user_id"
                              references="users(id)"/>
             </column>
-            <column name="cargo_id" type="INT">
+            <column name="cargo_id" type="BIGINT">
                 <constraints nullable="false"
                              foreignKeyName="fk_request_cargo_id"
                              references="cargo(id)"
                 />
             </column>
-            <column name="city_from" type="INT">
+            <column name="city_from" type="BIGINT">
                 <constraints nullable="false"
                              foreignKeyName="fk_request_from_city_id"
                              references="city(id)"/>
             </column>
-            <column name="city_to" type="INT">
+            <column name="city_to" type="BIGINT">
                 <constraints nullable="false"
                              foreignKeyName="fk_request_to_city_id"
                              references="city(id)"/>
             </column>
             <column name="count_km" type="int">
                 <constraints nullable="true"/>
+            </column>
+            <column name="analytic_value_id_status" type="int" remarks="analytic 900">
+                <constraints nullable="false"
+                             foreignKeyName="FK_request_analytic_value_id_status"
+                             references="analytic_value(code_analytic_value)"/>
             </column>
             <column name="date_reg" type="DATETIME(3)" defaultValueDate="NOW(3)">
                 <constraints nullable="false"/>
@@ -85,7 +90,7 @@
                 <constraints nullable="false"
                              primaryKey="true"/>
             </column>
-            <column name="request_id" type="int">
+            <column name="request_id" type="BIGINT">
                 <constraints nullable="false"
                              foreignKeyName="fk_request_params_request_id"
                              references="request(id)"/>
@@ -105,7 +110,7 @@
                 <constraints nullable="false"
                              primaryKey="true"/>
             </column>
-            <column name="cargo_id" type="int">
+            <column name="cargo_id" type="BIGINT">
                 <constraints nullable="false"
                              foreignKeyName="fk_cargo_params_cargo_id"
                              references="cargo(id)"/>

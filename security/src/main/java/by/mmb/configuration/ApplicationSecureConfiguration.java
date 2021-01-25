@@ -61,12 +61,15 @@ public class ApplicationSecureConfiguration extends KeycloakWebSecurityConfigure
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
-        http.authorizeRequests()
-                .antMatchers("/api/*")
-                .hasRole("USER")
-                .antMatchers("/admin/*")
-                .hasRole("ADMIN")
-                .anyRequest()
+        //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!
+        http
+                .cors().disable()
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/api/**")
+//                .hasRole("USER")
+//                .antMatchers("/admin/*")
+//                .hasRole("ADMIN")
                 .permitAll();
     }
 

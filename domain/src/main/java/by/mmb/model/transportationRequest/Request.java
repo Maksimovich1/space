@@ -1,8 +1,11 @@
 package by.mmb.model.transportationRequest;
 
+import by.mmb.enams.RequestStatus;
+import by.mmb.model.AdditionalParam;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Заявка на перевозку
@@ -13,14 +16,16 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Request {
     private long id;
     private long userId;
     private long cargoId;
     private int cityFrom;
     private int cityTo;
+    private RequestStatus status;
     private int countKM;
     @Setter(value = AccessLevel.PRIVATE) private LocalDateTime dateCreate;
     private LocalDateTime dateRefresh;
-//    private List<AdditionalParam> additionalParams;
+    private List<AdditionalParam> additionalParams;
 }
