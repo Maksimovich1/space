@@ -31,7 +31,7 @@
 
         <dependency>
             <groupId>by.mmb</groupId>
-            <artifactId>exception</artifactId>
+            <artifactId>repositories</artifactId>
             <version>0.0.1</version>
         </dependency>
 

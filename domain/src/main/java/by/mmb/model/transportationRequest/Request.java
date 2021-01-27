@@ -21,8 +21,8 @@ public class Request {
     private long id;
     private long userId;
     private long cargoId;
-    private int cityFrom;
-    private int cityTo;
+    private long cityFrom;
+    private long cityTo;
     private RequestStatus status;
     private int countKM;
     @Setter(value = AccessLevel.PRIVATE) private LocalDateTime dateCreate;

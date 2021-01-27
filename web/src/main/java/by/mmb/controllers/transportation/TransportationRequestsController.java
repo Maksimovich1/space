@@ -6,7 +6,6 @@ import by.mmb.exception.AppsException;
 import by.mmb.model.transportationRequest.Request;
 import by.mmb.service.TransportationRequestService;
 import lombok.NonNull;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -44,14 +43,15 @@ public class TransportationRequestsController {
     }
 
     @ExceptionHandlerProcessing
-    @PutMapping("/refresh")
-    public LocalDateTime refresh(@RequestBody long id) {
+    @PutMapping("/refresh/{id}")
+    public LocalDateTime refresh(@PathVariable long id) throws AppsException {
+        log.trace("Обновление: " + id + " refresh!");
         return transportationRequestService.refreshUpRequest(id);
     }
 
     @ExceptionHandlerProcessing
     @GetMapping("/all")
-    public List<Request> requests(){
+    public List<Request> requests() {
         return transportationRequestService.getAllRequest();
     }
 

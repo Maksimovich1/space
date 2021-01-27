@@ -24,9 +24,9 @@ public class IExceptionRepository implements ExceptionRepository {
 
     @Override
     public ErrorCode getErrorCodeByCode(int internalCode) {
-        String sql = "select ec.externalCode, ic.internalCode, ec.messageRU, ic.message from test.internal_codes ic\n" +
-                "inner join test.external_codes ec on ic.externalId = ec.externalCode\n" +
-                "where ic.internalCode = ?;";
+        String sql = "select ec.external_code, ic.internal_code, ec.message_ru, ic.message from test.internal_codes ic\n" +
+                "inner join test.external_codes ec on ic.external_id = ec.external_code\n" +
+                "where ic.internal_code = ?;";
         return jdbcTemplate.queryForObject(sql, new ErrorRowMapper(), internalCode);
     }
 }

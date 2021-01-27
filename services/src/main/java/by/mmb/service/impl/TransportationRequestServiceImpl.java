@@ -46,10 +46,10 @@ public class TransportationRequestServiceImpl implements TransportationRequestSe
     @Transactional
     @Override
     public boolean createNewRequest(@NonNull TransportationRequestDto dto) throws AppsException {
-        if(dto.getCityTo() != dto.getCityFrom() &&
+        if (dto.getCityTo() != dto.getCityFrom() &&
                 cityRepository.isPresent(List.of(dto.getCityFrom(), dto.getCityTo())) &&
                 cargoValidationObject.isValid(dto.getCargo())
-        ){
+        ) {
             long idCargo = cargoRepository.createNewCargo(dto.getCargo());
             Request request = Request.builder()
                     .cityFrom(dto.getCityFrom())
@@ -59,7 +59,7 @@ public class TransportationRequestServiceImpl implements TransportationRequestSe
                     .countKM(dto.getCountKM())
                     .status(RequestStatus.OPEN)
                     .cargoId(idCargo)
-                    .userId(1) // TODO !!!!!!!!!!!!
+                    .userId(securityService.getCurrentUser().getIdUser())
                     .additionalParams(dto.getAdditionalParams())
                     .build();
             long idNewRequest = requestRepository.createRequest(request);
@@ -69,8 +69,8 @@ public class TransportationRequestServiceImpl implements TransportationRequestSe
     }
 
     @Override
-    public LocalDateTime refreshUpRequest(long id) {
-        return null;
+    public LocalDateTime refreshUpRequest(long id) throws AppsException {
+        return requestRepository.refreshUpRequest(id, securityService.getCurrentUser().getIdUser());
     }
 
     @Override

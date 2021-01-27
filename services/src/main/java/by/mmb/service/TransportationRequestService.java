@@ -15,7 +15,7 @@ public interface TransportationRequestService {
 
     boolean createNewRequest(TransportationRequestDto dto) throws AppsException;
 
-    LocalDateTime refreshUpRequest(long id);
+    LocalDateTime refreshUpRequest(long id) throws AppsException;
 
     boolean updateRequest(TransportationRequestDto dto);
 

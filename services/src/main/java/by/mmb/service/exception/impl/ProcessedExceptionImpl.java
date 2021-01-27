@@ -32,7 +32,7 @@ public class ProcessedExceptionImpl implements ProcessedException {
             throw configureAppsException((AppsException) throwable);
         } else {
             log.trace("convert " + throwable.getClass().getSimpleName() + " to AppsException.");
-            throw new AutoAppsException(throwable.getMessage(), throwable, -19999);
+            throw new AutoAppsException(() -> throwable.getMessage(), throwable, -19999);
         }
     }
 
@@ -50,10 +50,11 @@ public class ProcessedExceptionImpl implements ProcessedException {
             ErrorCode errorCodeByInternalCode;
             try {
                 errorCodeByInternalCode = serviceException.getErrorCodeByInternalCode(internalCode);
-            } catch (AppsException e) {
+            } catch (Exception ex) {
+                ;
                 // нарушена структура ошибки
-                log.error("Нарушена страктура ошибки, информация может быть не полной");
-                appsEx = new AutoAppsException("Ошибка при разборе ошибки!", appsEx, -1);
+                log.error("Нарушена страктура ошибки, информация может быть не полной", ex);
+                appsEx = new AutoAppsException(() -> "Ошибка при разборе ошибки!", appsEx, -1);
                 return appsEx;
             }
             appsEx.getErrorCode().setMessage(errorCodeByInternalCode.getMessage());
@@ -62,7 +63,7 @@ public class ProcessedExceptionImpl implements ProcessedException {
         } else {
             // если каким то чудом здесь то нужно разбираться
             log.error("В AppsException поле errorCode = null!!");
-            appsEx = new AutoAppsException("Ошибка при разборе ошибки!", appsEx, -1);
+            appsEx = new AutoAppsException(() -> "Ошибка при разборе ошибки!", appsEx, -1);
         }
         return appsEx;
     }

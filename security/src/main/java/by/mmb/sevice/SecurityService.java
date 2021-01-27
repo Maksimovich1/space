@@ -9,5 +9,5 @@ import by.mmb.model.User;
 public interface SecurityService {
     User getCurrentUser() throws AppsException;
 
-    String getUserId() throws AppsException;
+    String getUserIdKeycloak() throws AppsException;
 }

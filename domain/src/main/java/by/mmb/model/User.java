@@ -10,16 +10,17 @@ import java.util.List;
 @Builder
 public class User {
 
-    private String id;
+    private long idUser;
+    private String idKeycloak;
     private LocalDateTime dateReg;
     /**
-     * analytic type = 6
+     * analytic type = 500
      */
     private int status;
     private String login;
     private String password;
     /**
-     * analytic type = 4
+     * analytic type = 400
      */
     private int type;
 

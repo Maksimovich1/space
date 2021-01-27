@@ -132,18 +132,19 @@
         </insert>
         <insert tableName="analytic_value">
             <column name="code_analytic_value" value="2"/>
-            <column name="code_analytic_type" value="400"/>
+            <column name="code_analytic_type" value="500"/>
             <column name="description" value="Блокирован"/>
         </insert>
         <insert tableName="analytic_value">
             <column name="code_analytic_value" value="3"/>
-            <column name="code_analytic_type" value="400"/>
+            <column name="code_analytic_type" value="500"/>
             <column name="description" value="Удален"/>
         </insert>
 <!--
 -->
         <insert tableName="users">
             <column name="date_reg" valueDate="now()"/>
+            <column name="id_keycloak" value="1231231231231"/>
             <column name="analytic_value_id_status" value="1"/>
             <column name="login" value="admin"/>
             <column name="password" value="1111"/>
@@ -152,6 +153,7 @@
 
         <insert tableName="users">
             <column name="date_reg" valueDate="now()"/>
+            <column name="id_keycloak" value="3333333333333"/>
             <column name="analytic_value_id_status" value="1"/>
             <column name="login" value="user"/>
             <column name="password" value="1111"/>

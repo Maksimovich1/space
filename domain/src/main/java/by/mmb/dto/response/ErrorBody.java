@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 public class ErrorBody {
     private String message;
+    private String messageWithDetails;
     private String messageForClient;
     private int code;
     private LocalDateTime time;

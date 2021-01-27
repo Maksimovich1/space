@@ -5,6 +5,7 @@ import by.mmb.exception.AppsException;
 import by.mmb.exception.ExceptionUtility;
 import by.mmb.model.transportationRequest.Request;
 import by.mmb.repo.RequestRepository;
+import by.mmb.repo.rowMapperCar.request.RequestRowMapper;
 import lombok.NonNull;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Optional;
 
 /**
  * @author andrew.maksimovich
@@ -43,8 +45,8 @@ public class RequestRepositoryImpl implements RequestRepository {
             ps.setLong(3, request.getCityFrom());
             ps.setLong(4, request.getCityTo());
             ps.setLong(5, request.getCountKM());
-            ps.setDate(6, new java.sql.Date(new Date().getTime()));
-            ps.setDate(7, new java.sql.Date(new Date().getTime()));
+            ps.setObject(6, new Date());
+            ps.setObject(7, new Date());
             ps.setInt(8, request.getStatus().getCode());
 
             return ps;
@@ -56,12 +58,29 @@ public class RequestRepositoryImpl implements RequestRepository {
     }
 
     @Override
-    public LocalDateTime refreshUpRequest(long idRequest) {
-        return null;
+    public LocalDateTime refreshUpRequest(long idRequest, long userId) throws AppsException {
+        int countRowsUpdate = jdbcTemplate.update(
+                "update test.request set date_refresh = ? where id = ? and user_id = ?",
+                new Date(),
+                idRequest,
+                userId);
+        if (countRowsUpdate == 1) {
+            return LocalDateTime.now();
+        }
+        throw new AppsException(() -> "Не найдена заявка для данного пользователя", -10235);
     }
 
     @Override
     public boolean changeStatus(long idRequest, RequestStatus status) {
         return false;
+    }
+
+    @Override
+    public Optional<Request> getRequestById(long id) {
+        Request request = jdbcTemplate.queryForObject(
+                "select id, user_id, cargo_id, city_from, city_to, count_km, analytic_value_id_status, date_reg, date_refresh  from  test.request where id = ?;",
+                new RequestRowMapper(),
+                id);
+        return Optional.ofNullable(request);
     }
 }

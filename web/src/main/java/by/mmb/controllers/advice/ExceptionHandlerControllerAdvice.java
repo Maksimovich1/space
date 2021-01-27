@@ -27,8 +27,10 @@ public class ExceptionHandlerControllerAdvice {
 
     @ExceptionHandler(value = {AppsException.class})
     public ResponseEntity<ErrorBody> handleInvalidInputException(AppsException ex) {
+        String messageAboutError = ex.getRootCause() != null ? ex.getRootCause().getMessage() : "";
         ErrorBody err = ErrorBody.builder()
                 .message(ex.getErrorCode().getMessage())
+                .messageWithDetails(ex.getMessage() + "\nINFO: " + messageAboutError)
                 .messageForClient(ex.getErrorCode().getMessageForClient())
                 .code(ex.getErrorCode().getExternalCode())
                 .time(LocalDateTime.now())

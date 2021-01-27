@@ -18,4 +18,17 @@ public enum RequestStatus {
     RequestStatus(int code) {
         this.code = code;
     }
+
+    public static RequestStatus getStatusByCode(final int code) {
+        switch (code) {
+            case 1:
+                return OPEN;
+            case 2:
+                return CLOSE;
+            case 3:
+                return DELETE;
+            default:
+                throw new IllegalArgumentException("Не валидный код = " + code);
+        }
+    }
 }

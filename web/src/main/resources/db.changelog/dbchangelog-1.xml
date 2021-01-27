@@ -64,6 +64,9 @@
             <column name="id" type="int" autoIncrement="true" remarks="ид пользователя">
                 <constraints unique="true" nullable="false" primaryKey="true"/>
             </column>
+            <column name="id_keycloak" type="varchar(255)" remarks="ид пользователя в keycloak">
+                <constraints unique="true" nullable="false"/>
+            </column>
             <column name="date_reg" type="DATE" remarks="Дата регистрации в системе">
                 <constraints nullable="false"/>
             </column>

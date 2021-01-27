@@ -4,6 +4,8 @@ import by.mmb.code.ErrorCode;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.function.Supplier;
+
 /**
  * The AppsException wraps all checked standard Java exception and enriches them with a custom error code.
  * You can use this code to retrieve localized error messages.
@@ -23,8 +25,14 @@ public class AppsException extends Exception {
     @Getter
     private final Throwable rootCause;
 
-    public AppsException(String message, int code) {
+    public AppsException(@NonNull String message, int code) {
         super(message);
+        errorCode = new ErrorCode(code);
+        this.rootCause = null;
+    }
+
+    public AppsException(@NonNull Supplier<String> message, int code) {
+        super(message.get());
         errorCode = new ErrorCode(code);
         this.rootCause = null;
     }
@@ -44,13 +52,25 @@ public class AppsException extends Exception {
     public AppsException(@NonNull String message) {
         super(message);
         this.errorCode = new ErrorCode();
-        this.rootCause = this;
+        this.rootCause = null;
+    }
+
+    public AppsException(@NonNull Supplier<String> message) {
+        super(message.get());
+        this.errorCode = new ErrorCode();
+        this.rootCause = null;
     }
 
     public AppsException(@NonNull String message, @NonNull Class clazz) {
         super(message);
         this.errorCode = new ErrorCode();
-        this.rootCause = this;
+        this.rootCause = null;
         this.aClass = clazz;
+    }
+
+    public AppsException(Supplier<String> message, Exception ex) {
+        super(message.get());
+        this.errorCode = new ErrorCode();
+        this.rootCause = ex;
     }
 }
