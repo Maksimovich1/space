@@ -2,6 +2,7 @@ package by.mmb.repo.impl;
 
 import by.mmb.enams.RequestStatus;
 import by.mmb.exception.AppsException;
+import by.mmb.exception.ExceptionUtility;
 import by.mmb.model.transportationRequest.Request;
 import by.mmb.repo.RequestRepository;
 import lombok.NonNull;
@@ -48,10 +49,9 @@ public class RequestRepositoryImpl implements RequestRepository {
 
             return ps;
         }, keyHolder);
-        if (keyHolder.getKey() == null) {
-            //TODO !!!! i`ll need to create an Utility class
-            throw new AppsException("", -12321);
-        }
+
+        ExceptionUtility.checkException(keyHolder.getKey(), NullPointerException.class, () -> "");
+
         return keyHolder.getKey().longValue();
     }
 

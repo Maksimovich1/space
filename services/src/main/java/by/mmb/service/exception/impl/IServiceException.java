@@ -4,6 +4,7 @@ import by.mmb.code.ErrorCode;
 import by.mmb.exception.AppsException;
 import by.mmb.repo.exception.ExceptionRepository;
 import by.mmb.service.exception.ServiceException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
  *
  * @author andrew.maksimovich
  */
+@Slf4j
 @Service
 public class IServiceException implements ServiceException {
 

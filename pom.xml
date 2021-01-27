@@ -10,6 +10,7 @@
         <module>web</module>
         <module>security</module>
         <module>exception</module>
+        <module>utility</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -56,6 +57,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
 
 </project>

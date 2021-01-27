@@ -40,6 +40,11 @@ public class ErrorCode {
         this.externalCode = -9999;
     }
 
+    public ErrorCode (){
+        this.internalCode = -19999;
+        this.externalCode = -9999;
+    }
+
     public ErrorCode(int externalCode, int internalCode) {
         this.externalCode = externalCode;
         this.internalCode = internalCode;

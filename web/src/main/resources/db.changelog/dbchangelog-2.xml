@@ -6,19 +6,6 @@
 	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="2" author="Andrew" labels="qwe2">
-        <insert tableName="external_codes">
-            <column name="external_code" value="-9999"/>
-            <column name="message_ru" value="Ошибка на сервере"/>
-        </insert>
-        <insert tableName="external_codes">
-            <column name="external_code" value="-5555"/>
-            <column name="message_ru" value="Ошибка с соединением со сторонним сервером"/>
-        </insert>
-        <insert tableName="internal_codes">
-            <column name="internal_code" value="-10111"/>
-            <column name="message" value="Ошибка с соединением со сторонним сервером"/>
-            <column name="external_id" value="-5555"/>
-        </insert>
 
         <insert tableName="analytic_type">
             <column name="description" value="Тип документа"/>

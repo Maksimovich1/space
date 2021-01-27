@@ -1,0 +1,48 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:liquibase="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="99" author="Andrew">
+
+        <insert tableName="external_codes">
+            <column name="external_code" value="-9999"/>
+            <column name="message_ru" value="Ошибка на сервере"/>
+        </insert>
+        <insert tableName="internal_codes">
+            <column name="internal_code" value="-19999"/>
+            <column name="message" value="Непредвиденная ошибка"/>
+            <column name="external_id" value="-9999"/>
+        </insert>
+        <!--
+        -->
+        <insert tableName="external_codes">
+            <column name="external_code" value="-5555"/>
+            <column name="message_ru" value="Ошибка с соединением со сторонним сервером"/>
+        </insert>
+        <insert tableName="internal_codes">
+            <column name="internal_code" value="-10111"/>
+            <column name="message" value="Ошибка с соединением со сторонним сервером"/>
+            <column name="external_id" value="-5555"/>
+        </insert>
+
+        <insert tableName="external_codes">
+            <column name="external_code" value="-9000"/>
+            <column name="message_ru" value="Некоректные параметры. Проверьте пожалуйста вводимые данные"/>
+        </insert>
+        <insert tableName="internal_codes">
+            <column name="internal_code" value="-10235"/>
+            <column name="message" value="Проблемы с валидацией данных"/>
+            <column name="external_id" value="-9000"/>
+        </insert>
+
+
+        <rollback>
+            <delete tableName="internal_codes"/>
+            <delete tableName="external_codes"/>
+        </rollback>
+
+        <liquibase:tagDatabase tag="errorsRollback"/>
+    </changeSet>
+</databaseChangeLog>

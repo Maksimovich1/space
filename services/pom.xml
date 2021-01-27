@@ -29,6 +29,7 @@
             <groupId>by.mmb</groupId>
             <artifactId>exception</artifactId>
             <version>0.0.1</version>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

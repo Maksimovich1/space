@@ -1,6 +1,7 @@
 package by.mmb.repo.impl;
 
 import by.mmb.exception.AppsException;
+import by.mmb.exception.ExceptionUtility;
 import by.mmb.model.transportationRequest.Cargo;
 import by.mmb.repo.CargoRepository;
 import lombok.NonNull;
@@ -43,10 +44,7 @@ public class CargoRepositoryImpl implements CargoRepository {
             return ps;
         }, keyHolder);
 
-        if (keyHolder.getKey() == null) {
-            //TODO !!!!!!!!!!!!!!!
-            throw new AppsException("", -12315);
-        }
+        ExceptionUtility.checkException(keyHolder.getKey(), NullPointerException.class, ()->"Ключ оказался пустым");
         return keyHolder.getKey().longValue();
     }
 }

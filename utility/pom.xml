@@ -10,32 +10,14 @@
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>repositories</artifactId>
+    <artifactId>utility</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>by.mmb</groupId>
-            <artifactId>domain</artifactId>
+            <artifactId>exception</artifactId>
             <version>0.0.1</version>
         </dependency>
-
-        <dependency>
-            <groupId>by.mmb</groupId>
-            <artifactId>utility</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
     </dependencies>
-
-
+    
 </project>

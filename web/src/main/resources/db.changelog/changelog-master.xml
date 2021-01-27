@@ -4,7 +4,12 @@
 
     <include file="db.changelog/dbchangelog-1.xml"/>
     <include file="db.changelog/dbchangelog-2.xml"/>
-<!--    TODO это нужно будет закоментировать-->
+    <!--    TODO это нужно будет закоментировать-->
     <include file="db.changelog/dbchangelog-4.xml"/>
     <include file="db.changelog/dbchangelog-5.xml"/>
+    <!--
+    -этот changelog должен быть выполнен последним, что можно было откатить и постоянно дополнять
+    -его новыми ошибками
+    -->
+    <include file="db.changelog/dbchangelog-99ErrorsCode.xml"/>
 </databaseChangeLog>

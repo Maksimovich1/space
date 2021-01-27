@@ -1,5 +1,7 @@
 package by.mmb.exception;
 
+import lombok.NonNull;
+
 /**
  * Ошибка которая генерироваться в инфоструктуре.
  * Нарпример в аспекте, генерируем эту ошибку передавая в нее оригинальную ошибку
@@ -9,7 +11,7 @@ package by.mmb.exception;
  */
 public class AutoAppsException extends AppsException {
 
-    public AutoAppsException(String message, Throwable cause, int code) {
-        super(message, cause, code);
+    public AutoAppsException(@NonNull String message, @NonNull Throwable cause, int internalCode) {
+        super(message, cause, internalCode);
     }
 }

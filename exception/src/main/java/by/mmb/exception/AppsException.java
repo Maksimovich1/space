@@ -1,6 +1,8 @@
 package by.mmb.exception;
 
 import by.mmb.code.ErrorCode;
+import lombok.Getter;
+import lombok.NonNull;
 
 /**
  * The AppsException wraps all checked standard Java exception and enriches them with a custom error code.
@@ -12,8 +14,13 @@ public class AppsException extends Exception {
 
     private static final long serialVersionUID = 7718828512143293558L;
 
+    @Getter
+    private Class aClass;
+
+    @Getter
     private final ErrorCode errorCode;
 
+    @Getter
     private final Throwable rootCause;
 
     public AppsException(String message, int code) {
@@ -22,22 +29,28 @@ public class AppsException extends Exception {
         this.rootCause = null;
     }
 
-    public AppsException(String message, Throwable cause, ErrorCode errorCode) {
+    public AppsException(@NonNull String message, @NonNull Throwable cause, @NonNull ErrorCode errorCode) {
         super(message, cause);
         this.errorCode = errorCode;
         this.rootCause = cause;
     }
 
-    public AppsException(String message, Throwable cause, int code) {
+    public AppsException(@NonNull String message, @NonNull Throwable cause, int code) {
+        super(message, cause);
         errorCode = new ErrorCode(code);
         this.rootCause = cause;
     }
 
-    public ErrorCode getErrorCode() {
-        return errorCode;
+    public AppsException(@NonNull String message) {
+        super(message);
+        this.errorCode = new ErrorCode();
+        this.rootCause = this;
     }
 
-    public Throwable getRootCause() {
-        return rootCause;
+    public AppsException(@NonNull String message, @NonNull Class clazz) {
+        super(message);
+        this.errorCode = new ErrorCode();
+        this.rootCause = this;
+        this.aClass = clazz;
     }
 }
