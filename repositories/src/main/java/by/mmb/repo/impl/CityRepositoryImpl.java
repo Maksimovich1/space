@@ -39,7 +39,7 @@ public class CityRepositoryImpl implements CityRepository {
     public boolean isPresent(List<Integer> ids) throws AppsException {
         log.trace("Проверяем существуют ли переданные ид городов " + ids);
         String inSql = String.join(",", Collections.nCopies(ids.size(), "?"));
-        Integer countRow = jdbcTemplate.queryForObject(String.format("select count(*) from test.city where id in (%s)", inSql), Integer.class, ids.toArray());
+        Integer countRow = jdbcTemplate.queryForObject(String.format("select count(*) from space.city where id in (%s)", inSql), Integer.class, ids.toArray());
         if (countRow == null || countRow != ids.size()) {
             log.error("Переданные города не существуют или недоступны!");
             throw new AppsException("Переданные города не существуют или недоступны!", -10235);

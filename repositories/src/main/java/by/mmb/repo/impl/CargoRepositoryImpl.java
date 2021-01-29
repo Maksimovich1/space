@@ -29,7 +29,7 @@ public class CargoRepositoryImpl implements CargoRepository {
 
     @Override
     public long createNewCargo(@NonNull Cargo cargo) throws AppsException {
-        var sql = "insert into test.cargo (name_cargo, weight_kg, length_sm, width_sm, height_sm) values (?,?,?,?,?)";
+        var sql = "insert into space.cargo (name_cargo, weight_kg, length_sm, width_sm, height_sm) values (?,?,?,?,?)";
         var keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {

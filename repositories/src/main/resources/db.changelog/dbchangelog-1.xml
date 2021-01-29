@@ -6,7 +6,7 @@
 
     <changeSet id="1" author="Andrew">
         <!---->
-        <createTable tableName="analytic_type" remarks="Тип аналитики">
+        <createTable tableName="analytic_type" schemaName="space" remarks="Тип аналитики">
 
             <column name="id_type" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -22,11 +22,11 @@
 
         </createTable>
         
-        <createIndex tableName="analytic_type" indexName="idtypex">
+        <createIndex tableName="analytic_type" schemaName="space" indexName="idtypex">
             <column descending="true" name="code_analytic_type"/>
         </createIndex>
         <!---->
-        <createTable tableName="analytic_value" remarks="Значение типов аналитики">
+        <createTable tableName="analytic_value" schemaName="space" remarks="Значение типов аналитики">
             <column name="id_value" type="int" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -55,11 +55,11 @@
             </column>
         </createTable>
 
-        <createIndex tableName="analytic_value" indexName="code_analytic_valuex">
+        <createIndex tableName="analytic_value" schemaName="space" indexName="code_analytic_valuex">
             <column name="code_analytic_value" descending="true"/>
         </createIndex>
         <!--таблица пользователей-->
-        <createTable tableName="users"
+        <createTable tableName="users" schemaName="space"
                      remarks="Таблица для хранения все пользователей в системе">
             <column name="id" type="int" autoIncrement="true" remarks="ид пользователя">
                 <constraints unique="true" nullable="false" primaryKey="true"/>
@@ -92,7 +92,7 @@
 
         </createTable>
         <!---->
-        <createTable tableName="cars">
+        <createTable tableName="cars" schemaName="space">
             <column name="id" type="int" autoIncrement="true" remarks="ИД машины">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -133,7 +133,7 @@
             </column>
         </createTable>
         <!--Таблица параметров-->
-        <createTable tableName="user_params"
+        <createTable tableName="user_params" schemaName="space"
                      remarks="Дополнительные параметры пользователей">
             <column name="id" type="int" autoIncrement="true" remarks="Ид параметра">
                 <constraints nullable="false"
@@ -154,13 +154,13 @@
             </column>
         </createTable>
         <!--ошибки-->
-        <createTable tableName="external_codes" remarks="ошибки для выдачи наружу">
+        <createTable tableName="external_codes" schemaName="space" remarks="ошибки для выдачи наружу">
             <column name="external_code" type="int" autoIncrement="true" remarks="код ошибки">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="message_ru" type="varchar(255)" remarks="Ошибка для пользователя"/>
         </createTable>
-        <createTable tableName="internal_codes" remarks="Внутренние ошибки для логирования">
+        <createTable tableName="internal_codes" schemaName="space" remarks="Внутренние ошибки для логирования">
             <column name="internal_code" type="int" autoIncrement="true" remarks="">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -177,13 +177,13 @@
         </createTable>
 
         <rollback>
-            <dropTable tableName="internal_codes"/>
-            <dropTable tableName="external_codes"/>
-            <dropTable tableName="user_params"/>
-            <dropTable tableName="cars"/>
-            <dropTable tableName="users"/>
-            <dropTable tableName="analytic_value"/>
-            <dropTable tableName="analytic_type"/>
+            <dropTable tableName="internal_codes" schemaName="space"/>
+            <dropTable tableName="external_codes" schemaName="space"/>
+            <dropTable tableName="user_params" schemaName="space"/>
+            <dropTable tableName="cars" schemaName="space"/>
+            <dropTable tableName="users" schemaName="space"/>
+            <dropTable tableName="analytic_value" schemaName="space"/>
+            <dropTable tableName="analytic_type" schemaName="space"/>
         </rollback>
     </changeSet>
 

@@ -35,7 +35,7 @@ public class RequestRepositoryImpl implements RequestRepository {
 
     @Override
     public long createRequest(@NonNull Request request) throws AppsException {
-        val sql = "insert into test.request (user_id, cargo_id, city_from, city_to, count_km, date_reg, date_refresh, analytic_value_id_status) VALUES (?,?,?,?,?,?,?,?)";
+        val sql = "insert into space.request (user_id, cargo_id, city_from, city_to, count_km, date_reg, date_refresh, analytic_value_id_status) VALUES (?,?,?,?,?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update(connection -> {
             PreparedStatement ps =
@@ -60,7 +60,7 @@ public class RequestRepositoryImpl implements RequestRepository {
     @Override
     public LocalDateTime refreshUpRequest(long idRequest, long userId) throws AppsException {
         int countRowsUpdate = jdbcTemplate.update(
-                "update test.request set date_refresh = ? where id = ? and user_id = ?",
+                "update space.request set date_refresh = ? where id = ? and user_id = ?",
                 new Date(),
                 idRequest,
                 userId);
@@ -78,7 +78,7 @@ public class RequestRepositoryImpl implements RequestRepository {
     @Override
     public Optional<Request> getRequestById(long id) {
         Request request = jdbcTemplate.queryForObject(
-                "select id, user_id, cargo_id, city_from, city_to, count_km, analytic_value_id_status, date_reg, date_refresh  from  test.request where id = ?;",
+                "select id, user_id, cargo_id, city_from, city_to, count_km, analytic_value_id_status, date_reg, date_refresh  from  space.request where id = ?;",
                 new RequestRowMapper(),
                 id);
         return Optional.ofNullable(request);

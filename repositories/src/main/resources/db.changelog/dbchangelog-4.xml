@@ -8,11 +8,13 @@
         <liquibase:tagDatabase tag="qwe2"/>
         <!--
         -->
-        <createTable tableName="cargo" remarks="Таблица грузов">
+        <createTable tableName="cargo" schemaName="space" remarks="Таблица грузов">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
-            <column name="name_cargo" type="varchar(255)" remarks="Имя груза"/>
+            <column name="name_cargo" type="varchar(255)" remarks="Имя груза">
+            <constraints nullable="false"/>
+            </column>
             <column name="weight_kg" type="INT" remarks="Вес в килошраммах"/>
             <column name="length_sm" type="INT" remarks="длина в свнтиметрах"/>
             <column name="width_sm" type="INT" remarks="ширина в сантиметрах"/>
@@ -20,7 +22,7 @@
         </createTable>
         <!--
         -->
-        <createTable tableName="city" remarks="Города">
+        <createTable tableName="city" schemaName="space" remarks="Города">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -42,7 +44,7 @@
         </createTable>
         <!--
         -->
-        <createTable tableName="request">
+        <createTable tableName="request" schemaName="space" remarks="заявки на перевозки">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -85,7 +87,7 @@
 
         <!--
         -->
-        <createTable tableName="request_params" remarks="Доп параметры заявки">
+        <createTable tableName="request_params" schemaName="space" remarks="Доп параметры заявки">
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false"
                              primaryKey="true"/>
@@ -105,7 +107,7 @@
 
         <!--
         -->
-        <createTable tableName="cargo_params" remarks="Доп параметры груза">
+        <createTable tableName="cargo_params" schemaName="space" remarks="Доп параметры груза">
             <column name="id" type="int" autoIncrement="true">
                 <constraints nullable="false"
                              primaryKey="true"/>
@@ -124,11 +126,11 @@
         </createTable>
 
         <rollback>
-            <dropTable tableName="cargo_params"/>
-            <dropTable tableName="request_params"/>
-            <dropTable tableName="request"/>
-            <dropTable tableName="city"/>
-            <dropTable tableName="cargo"/>
+            <dropTable tableName="cargo_params" schemaName="space"/>
+            <dropTable tableName="request_params" schemaName="space"/>
+            <dropTable tableName="request" schemaName="space"/>
+            <dropTable tableName="city" schemaName="space"/>
+            <dropTable tableName="cargo" schemaName="space"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>

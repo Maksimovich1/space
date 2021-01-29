@@ -6,64 +6,65 @@
 	  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <changeSet id="5" author="Andrew">
-        <insert tableName="analytic_type">
+        <liquibase:tagDatabase tag="qwe5"/>
+
+        <insert tableName="analytic_type" schemaName="space">
             <column name="description" value="Область(Беларусь)"/>
             <column name="code_analytic_type" value="800"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="800"/>
             <column name="code_analytic_value" value="1"/>
             <column name="description" value="Брестская область"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="2"/>
             <column name="code_analytic_type" value="800"/>
             <column name="description" value="Витебская область"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="3"/>
             <column name="code_analytic_type" value="800"/>
             <column name="description" value="Гомельская область"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="4"/>
             <column name="code_analytic_type" value="800"/>
             <column name="description" value="Гродненская область"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="5"/>
             <column name="code_analytic_type" value="800"/>
             <column name="description" value="Минская область"/>
         </insert>
 
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="6"/>
             <column name="code_analytic_type" value="800"/>
             <column name="description" value="Могилевская область"/>
         </insert>
         <!--
         -->
-        <insert tableName="city">
+        <insert tableName="city" schemaName="space">
             <column name="name_city" value="Барановичи"/>
             <column name="analytic_value_id_district" value="1"/>
         </insert>
-        <insert tableName="city">
+        <insert tableName="city" schemaName="space">
             <column name="name_city" value="Брест"/>
             <column name="analytic_value_id_district" value="1"/>
         </insert>
-        <insert tableName="city">
+        <insert tableName="city" schemaName="space">
             <column name="name_city" value="Минск"/>
             <column name="analytic_value_id_district" value="5"/>
         </insert>
-        <insert tableName="city">
+        <insert tableName="city" schemaName="space">
             <column name="name_city" value="Гродно"/>
             <column name="analytic_value_id_district" value="4"/>
         </insert>
 
         <rollback>
-            <delete tableName="city"/>
+            <delete tableName="city" schemaName="space"/>
         </rollback>
-        <liquibase:tagDatabase tag="qwe5"/>
     </changeSet>
 
 </databaseChangeLog>

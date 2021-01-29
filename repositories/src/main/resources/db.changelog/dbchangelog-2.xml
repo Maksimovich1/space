@@ -7,85 +7,87 @@
 
     <changeSet id="2" author="Andrew" labels="qwe2">
 
-        <insert tableName="analytic_type">
+        <liquibase:tagDatabase tag="qwe1"/>
+
+        <insert tableName="analytic_type" schemaName="space">
             <column name="description" value="Тип документа"/>
             <column name="code_analytic_type" value="100"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="100"/>
             <column name="code_analytic_value" value="1"/>
             <column name="description" value="Паспорт"/>
         </insert>
 
-<!--
- -->
-        <insert tableName="analytic_type">
+        <!--
+         -->
+        <insert tableName="analytic_type" schemaName="space">
             <column name="description" value="Бренд транспорта"/>
             <column name="code_analytic_type" value="600"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="600"/>
             <column name="code_analytic_value" value="1"/>
             <column name="description" value="Mercedes"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="2"/>
             <column name="code_analytic_type" value="600"/>
             <column name="description" value="Volkswagen"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="3"/>
             <column name="code_analytic_type" value="600"/>
             <column name="description" value="Volvo"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="4"/>
             <column name="code_analytic_type" value="600"/>
             <column name="description" value="Opel"/>
         </insert>
-<!--
--->
-        <insert tableName="analytic_type">
+        <!--
+        -->
+        <insert tableName="analytic_type" schemaName="space">
             <column name="description" value="Статус доступа автомобиля"/>
             <column name="code_analytic_type" value="200"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="200"/>
             <column name="code_analytic_value" value="1"/>
             <column name="description" value="Недоступна (на ремонте)"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="200"/>
             <column name="code_analytic_value" value="2"/>
             <column name="description" value="Недоступна (отпуск)"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="200"/>
             <column name="code_analytic_value" value="3"/>
             <column name="description" value="Доступна"/>
         </insert>
 
-<!--
--->
-        <insert tableName="analytic_type">
+        <!--
+        -->
+        <insert tableName="analytic_type" schemaName="space">
             <column name="description" value="Модель транспорта"/>
             <column name="code_analytic_type" value="300"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="300"/>
             <column name="code_analytic_value" value="1"/>
             <column name="description" value="Crafter"/>
             <column name="relation1_t" value="600"/>
             <column name="relation1_v" value="1"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="300"/>
             <column name="code_analytic_value" value="2"/>
             <column name="description" value="Zafira"/>
             <column name="relation1_t" value="600"/>
             <column name="relation1_v" value="4"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="300"/>
             <column name="code_analytic_value" value="3"/>
             <column name="description" value="Sprinter"/>
@@ -94,55 +96,55 @@
         </insert>
         <!--
             -->
-        <insert tableName="analytic_type">
+        <insert tableName="analytic_type" schemaName="space">
             <column name="description" value="Тип аккаунта"/>
             <column name="code_analytic_type" value="400"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="400"/>
             <column name="description" value="Перевозчик"/>
             <column name="code_analytic_value" value="1"/>
 
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="400"/>
             <column name="code_analytic_value" value="2"/>
             <column name="description" value="Водитель"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="3"/>
             <column name="code_analytic_type" value="400"/>
             <column name="description" value="Заказчик"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="4"/>
             <column name="code_analytic_type" value="400"/>
             <column name="description" value="Администратор"/>
         </insert>
         <!--
           -->
-        <insert tableName="analytic_type">
+        <insert tableName="analytic_type" schemaName="space">
             <column name="description" value="Тип статуса аккаунта"/>
             <column name="code_analytic_type" value="500"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_type" value="500"/>
             <column name="code_analytic_value" value="1"/>
             <column name="description" value="Открыт"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="2"/>
             <column name="code_analytic_type" value="500"/>
             <column name="description" value="Блокирован"/>
         </insert>
-        <insert tableName="analytic_value">
+        <insert tableName="analytic_value" schemaName="space">
             <column name="code_analytic_value" value="3"/>
             <column name="code_analytic_type" value="500"/>
             <column name="description" value="Удален"/>
         </insert>
-<!--
--->
-        <insert tableName="users">
+        <!--
+        -->
+        <insert tableName="users" schemaName="space">
             <column name="date_reg" valueDate="now()"/>
             <column name="id_keycloak" value="1231231231231"/>
             <column name="analytic_value_id_status" value="1"/>
@@ -151,7 +153,7 @@
             <column name="analytic_value_id_type" value="4"/>
         </insert>
 
-        <insert tableName="users">
+        <insert tableName="users" schemaName="space">
             <column name="date_reg" valueDate="now()"/>
             <column name="id_keycloak" value="3333333333333"/>
             <column name="analytic_value_id_status" value="1"/>
@@ -160,7 +162,7 @@
             <column name="analytic_value_id_type" value="3"/>
         </insert>
 
-        <insert tableName="cars">
+        <insert tableName="cars" schemaName="space">
             <column name="analytic_value_id_brand" value="1"/>
             <column name="analytic_value_id_model" value="1"/>
             <column name="analytic_value_id_status" value="3"/>
@@ -172,15 +174,14 @@
         </insert>
 
         <rollback>
-            <delete tableName="cars"/>
-            <delete tableName="users"/>
-            <delete tableName="analytic_value"/>
-            <delete tableName="analytic_type"/>
-            <delete tableName="internal_codes"/>
-            <delete tableName="external_codes"/>
+            <delete tableName="cars" schemaName="space"/>
+            <delete tableName="users" schemaName="space"/>
+            <delete tableName="analytic_value" schemaName="space"/>
+            <delete tableName="analytic_type" schemaName="space"/>
+            <delete tableName="internal_codes" schemaName="space"/>
+            <delete tableName="external_codes" schemaName="space"/>
         </rollback>
 
-        <liquibase:tagDatabase tag="qwe1"/>
     </changeSet>
 
 </databaseChangeLog>
