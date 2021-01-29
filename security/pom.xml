@@ -25,14 +25,8 @@
 
         <dependency>
             <groupId>by.mmb</groupId>
-            <artifactId>domain</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>by.mmb</groupId>
             <artifactId>repositories</artifactId>
-            <version>0.0.1</version>
+            <version>${repositories.version}</version>
         </dependency>
 
     </dependencies>

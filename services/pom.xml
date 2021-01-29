@@ -13,23 +13,11 @@
     <artifactId>services</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>by.mmb</groupId>
-            <artifactId>repositories</artifactId>
-            <version>0.0.1</version>
-        </dependency>
 
         <dependency>
             <groupId>by.mmb</groupId>
             <artifactId>security</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>by.mmb</groupId>
-            <artifactId>exception</artifactId>
-            <version>0.0.1</version>
-            <optional>true</optional>
+            <version>${security.version}</version>
         </dependency>
     </dependencies>
 

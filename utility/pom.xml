@@ -16,7 +16,7 @@
         <dependency>
             <groupId>by.mmb</groupId>
             <artifactId>exception</artifactId>
-            <version>0.0.1</version>
+            <version>${exception.version}</version>
         </dependency>
     </dependencies>
     

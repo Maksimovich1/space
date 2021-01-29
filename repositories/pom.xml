@@ -16,13 +16,13 @@
         <dependency>
             <groupId>by.mmb</groupId>
             <artifactId>domain</artifactId>
-            <version>0.0.1</version>
+            <version>${domain.version}</version>
         </dependency>
 
         <dependency>
             <groupId>by.mmb</groupId>
             <artifactId>utility</artifactId>
-            <version>0.0.1</version>
+            <version>${utility.version}</version>
         </dependency>
 
         <dependency>

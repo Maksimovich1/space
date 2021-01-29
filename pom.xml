@@ -26,6 +26,13 @@
 
     <properties>
         <java.version>11</java.version>
+        <domain.version>0.0.1</domain.version>
+        <repositories.version>0.0.1</repositories.version>
+        <web.version>0.0.1</web.version>
+        <security.version>0.0.1</security.version>
+        <exception.version>0.0.1</exception.version>
+        <utility.version>0.0.1</utility.version>
+        <services.version>0.0.1</services.version>
     </properties>
 
     <dependencies>
@@ -39,6 +46,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
