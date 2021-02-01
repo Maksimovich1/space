@@ -55,7 +55,7 @@ class ProcessedExceptionImplTest {
     void handlerException_throw_known_exception() throws AppsException {
         String customErr = "Что то пошло не так";
         Mockito.lenient().when(serviceException.getErrorCodeByInternalCode(-15555)).thenReturn(errorCode);
-        AppsException appsException = new AppsException(customErr, new NullPointerException(errMess), -15555);
+        AppsException appsException = new AppsException(() -> customErr, new NullPointerException(errMess), -15555);
 
         ProcessedException processedException = new ProcessedExceptionImpl(serviceException);
 

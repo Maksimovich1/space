@@ -25,8 +25,12 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 @ComponentScan(basePackageClasses = KeycloakSecurityComponents.class)
 public class ApplicationSecureConfiguration extends KeycloakWebSecurityConfigurerAdapter {
 
+    private final KeycloakClientRequestFactory keycloakClientRequestFactory;
+
     @Autowired
-    public KeycloakClientRequestFactory keycloakClientRequestFactory;
+    public ApplicationSecureConfiguration(KeycloakClientRequestFactory keycloakClientRequestFactory) {
+        this.keycloakClientRequestFactory = keycloakClientRequestFactory;
+    }
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)

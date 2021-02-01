@@ -1,5 +1,6 @@
 package by.mmb.controllers.registration;
 
+import by.mmb.HttpStatus;
 import by.mmb.controllers.advice.annotation.ExceptionHandlerProcessing;
 import by.mmb.dto.UserDTO;
 import by.mmb.exception.AppsException;
@@ -25,7 +26,7 @@ public class NoAuthController {
     @GetMapping("/test")
     public UserDTO avoid() throws AppsException {
 
-        throw new AppsException("wwwwwwwwwwwwwwwwwwww", -10111);
+        throw new AppsException(() -> "wwwwwwwwwwwwwwwwwwww", -10111, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandlerProcessing

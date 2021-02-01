@@ -14,6 +14,6 @@ import java.util.function.Supplier;
 public class AutoAppsException extends AppsException {
 
     public AutoAppsException(@NonNull Supplier<String> message, @NonNull Throwable cause, int internalCode) {
-        super(message.get(), cause, internalCode);
+        super(message, cause, internalCode);
     }
 }

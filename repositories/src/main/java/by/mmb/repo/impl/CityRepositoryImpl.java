@@ -1,5 +1,6 @@
 package by.mmb.repo.impl;
 
+import by.mmb.HttpStatus;
 import by.mmb.exception.AppsException;
 import by.mmb.model.transportationRequest.City;
 import by.mmb.repo.CityRepository;
@@ -42,7 +43,7 @@ public class CityRepositoryImpl implements CityRepository {
         Integer countRow = jdbcTemplate.queryForObject(String.format("select count(*) from space.city where id in (%s)", inSql), Integer.class, ids.toArray());
         if (countRow == null || countRow != ids.size()) {
             log.error("Переданные города не существуют или недоступны!");
-            throw new AppsException("Переданные города не существуют или недоступны!", -10235);
+            throw new AppsException(() -> "Переданные города не существуют или недоступны!", -10235, HttpStatus.BAD_REQUEST);
         }
         log.trace("Проверка прошла успешно!");
         return true;

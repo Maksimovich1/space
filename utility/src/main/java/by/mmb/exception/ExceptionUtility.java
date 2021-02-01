@@ -3,7 +3,7 @@ package by.mmb.exception;
 import java.util.function.Supplier;
 
 /**
- * Ктилитный класс где будут инкапсулироваться
+ * Утилитный класс где будут инкапсулироваться
  * разные шаблоны
  *
  * @author andrew.maksimovich
@@ -11,7 +11,7 @@ import java.util.function.Supplier;
 public final class ExceptionUtility {
 
     private ExceptionUtility() throws AppsException {
-        throw new AppsException("Запрещено создавать экземпляр этого класса!");
+        throw new AppsException(() -> "Запрещено создавать экземпляр этого класса!");
     }
 
     /**

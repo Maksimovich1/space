@@ -32,7 +32,7 @@ public class ProcessedExceptionImpl implements ProcessedException {
             throw configureAppsException((AppsException) throwable);
         } else {
             log.trace("convert " + throwable.getClass().getSimpleName() + " to AppsException.");
-            throw new AutoAppsException(() -> throwable.getMessage(), throwable, -19999);
+            throw new AutoAppsException(throwable::getMessage, throwable, -19999);
         }
     }
 

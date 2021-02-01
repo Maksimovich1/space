@@ -1,5 +1,6 @@
 package by.mmb.repo.impl;
 
+import by.mmb.HttpStatus;
 import by.mmb.enams.RequestStatus;
 import by.mmb.exception.AppsException;
 import by.mmb.exception.ExceptionUtility;
@@ -67,7 +68,7 @@ public class RequestRepositoryImpl implements RequestRepository {
         if (countRowsUpdate == 1) {
             return LocalDateTime.now();
         }
-        throw new AppsException(() -> "Не найдена заявка для данного пользователя", -10235);
+        throw new AppsException(() -> "Не найдена заявка для данного пользователя", -10235, HttpStatus.BAD_REQUEST);
     }
 
     @Override

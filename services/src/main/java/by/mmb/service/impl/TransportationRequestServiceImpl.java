@@ -1,5 +1,6 @@
 package by.mmb.service.impl;
 
+import by.mmb.HttpStatus;
 import by.mmb.dto.request.TransportationRequestDto;
 import by.mmb.enams.RequestStatus;
 import by.mmb.exception.AppsException;
@@ -45,7 +46,7 @@ public class TransportationRequestServiceImpl implements TransportationRequestSe
 
     @Transactional
     @Override
-    public boolean createNewRequest(@NonNull TransportationRequestDto dto) throws AppsException {
+    public long createNewRequest(@NonNull TransportationRequestDto dto) throws AppsException {
         if (dto.getCityTo() != dto.getCityFrom() &&
                 cityRepository.isPresent(List.of(dto.getCityFrom(), dto.getCityTo())) &&
                 cargoValidationObject.isValid(dto.getCargo())
@@ -62,10 +63,9 @@ public class TransportationRequestServiceImpl implements TransportationRequestSe
                     .userId(securityService.getCurrentUser().getIdUser())
                     .additionalParams(dto.getAdditionalParams())
                     .build();
-            long idNewRequest = requestRepository.createRequest(request);
-            return idNewRequest > 0;
+            return requestRepository.createRequest(request);
         }
-        return false;
+        throw new AppsException(() -> "Города не должны быть одинаковые!", -10235, HttpStatus.BAD_REQUEST);
     }
 
     @Override

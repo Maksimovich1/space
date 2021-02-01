@@ -1,6 +1,7 @@
 package by.mmb.repo.rowMapperCar.request;
 
 import by.mmb.CommonUtility;
+import by.mmb.HttpStatus;
 import by.mmb.enams.RequestStatus;
 import by.mmb.exception.AppsException;
 import by.mmb.model.transportationRequest.Request;
@@ -20,7 +21,7 @@ public class RequestRowMapper implements RowMapper<Request> {
 
         if (!resultSet.isBeforeFirst()) {
             //TODO создать unchecked ex!!!
-            throw new AppsException(() -> "Записи не найдены!", -11212);
+            throw new AppsException(() -> "Записи не найдены!", -11212, HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return Request.builder()

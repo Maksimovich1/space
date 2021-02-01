@@ -1,5 +1,6 @@
 package by.mmb.service.exception.impl;
 
+import by.mmb.HttpStatus;
 import by.mmb.code.ErrorCode;
 import by.mmb.exception.AppsException;
 import by.mmb.repo.exception.ExceptionRepository;
@@ -33,7 +34,7 @@ public class IServiceException implements ServiceException {
 
     private void checkValidInternalCode(int internalCode) throws AppsException {
         if (internalCode >= 0) {
-            throw new AppsException("Не валидный код ошибки = " + internalCode, -11111);
+            throw new AppsException(() -> "Не валидный код ошибки = " + internalCode, -11111, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -48,7 +49,7 @@ public class IServiceException implements ServiceException {
         try {
             return exceptionRepository.getErrorCodeByCode(internalCode);
         } catch (Exception ex) {
-            throw new AppsException("Error", ex, -10111);
+            throw new AppsException(() -> "Error", ex, -10111);
         }
     }
 }

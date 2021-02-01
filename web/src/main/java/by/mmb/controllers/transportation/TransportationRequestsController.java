@@ -8,6 +8,8 @@ import by.mmb.service.TransportationRequestService;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -31,9 +33,9 @@ public class TransportationRequestsController {
 
     @ExceptionHandlerProcessing
     @PostMapping("/request")
-    public boolean createTransReq(@RequestBody @NonNull TransportationRequestDto transportationRequestDto) throws AppsException {
+    public ResponseEntity<Long> createTransReq(@RequestBody @NonNull TransportationRequestDto transportationRequestDto) throws AppsException {
         log.trace("Создание нового запроса: " + transportationRequestDto);
-        return transportationRequestService.createNewRequest(transportationRequestDto);
+        return new ResponseEntity<>(transportationRequestService.createNewRequest(transportationRequestDto), HttpStatus.CREATED);
     }
 
     @ExceptionHandlerProcessing

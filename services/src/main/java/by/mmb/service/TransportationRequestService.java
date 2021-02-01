@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface TransportationRequestService {
 
-    boolean createNewRequest(TransportationRequestDto dto) throws AppsException;
+    long createNewRequest(TransportationRequestDto dto) throws AppsException;
 
     LocalDateTime refreshUpRequest(long id) throws AppsException;
 
