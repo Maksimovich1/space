@@ -20,9 +20,9 @@ import java.util.List;
 @NoArgsConstructor
 public class TransportationRequestDto {
 
-    private int cityFrom;
-    private int cityTo;
+    private long cityFrom;
+    private long cityTo;
     private int countKM;
     private Cargo cargo;
-    private List<AdditionalParam> additionalParams;
+    private AdditionalParam additionalParams;
 }

@@ -144,6 +144,29 @@
         </insert>
         <!--
         -->
+        <insert tableName="analytic_type" schemaName="space">
+            <column name="description" value="Статус заявки"/>
+            <column name="code_analytic_type" value="900"/>
+        </insert>
+        <insert tableName="analytic_value" schemaName="space">
+            <column name="code_analytic_type" value="900"/>
+            <column name="code_analytic_value" value="1"/>
+            <column name="description" value="Открыта"/>
+        </insert>
+
+        <insert tableName="analytic_value" schemaName="space">
+            <column name="code_analytic_type" value="900"/>
+            <column name="code_analytic_value" value="2"/>
+            <column name="description" value="Закрыта"/>
+        </insert>
+
+        <insert tableName="analytic_value" schemaName="space">
+            <column name="code_analytic_type" value="900"/>
+            <column name="code_analytic_value" value="3"/>
+            <column name="description" value="Удалена"/>
+        </insert>
+        <!--
+        -->
         <insert tableName="users" schemaName="space">
             <column name="date_reg" valueDate="now()"/>
             <column name="id_keycloak" value="1231231231231"/>

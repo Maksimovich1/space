@@ -12,5 +12,5 @@ public interface CityRepository {
 
     boolean addNewCity(City city);
     City getCityById(long idCity);
-    boolean isPresent(List<Integer> ids) throws AppsException;
+    boolean isPresent(List<Long> ids) throws AppsException;
 }

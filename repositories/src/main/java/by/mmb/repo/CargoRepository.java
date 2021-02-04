@@ -9,4 +9,6 @@ import by.mmb.model.transportationRequest.Cargo;
 public interface CargoRepository {
 
     long createNewCargo(Cargo cargo) throws AppsException;
+
+    Cargo getCargoById(long cargoId, boolean showOnlyInOpenRequest);
 }

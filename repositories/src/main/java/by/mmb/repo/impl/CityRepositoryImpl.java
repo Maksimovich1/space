@@ -37,7 +37,7 @@ public class CityRepositoryImpl implements CityRepository {
     }
 
     @Override
-    public boolean isPresent(List<Integer> ids) throws AppsException {
+    public boolean isPresent(List<Long> ids) throws AppsException {
         log.trace("Проверяем существуют ли переданные ид городов " + ids);
         String inSql = String.join(",", Collections.nCopies(ids.size(), "?"));
         Integer countRow = jdbcTemplate.queryForObject(String.format("select count(*) from space.city where id in (%s)", inSql), Integer.class, ids.toArray());

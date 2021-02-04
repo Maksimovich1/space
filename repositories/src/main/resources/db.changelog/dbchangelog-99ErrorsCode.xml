@@ -29,6 +29,8 @@
             <column name="external_id" value="-5555"/>
         </insert>
 
+        <!--
+        -->
         <insert tableName="external_codes" schemaName="space">
             <column name="external_code" value="-9000"/>
             <column name="message_ru" value="Некоректные параметры. Проверьте пожалуйста вводимые данные"/>
@@ -37,6 +39,22 @@
             <column name="internal_code" value="-10235"/>
             <column name="message" value="Проблемы с валидацией данных"/>
             <column name="external_id" value="-9000"/>
+        </insert>
+        <insert tableName="internal_codes" schemaName="space">
+            <column name="internal_code" value="-11212"/>
+            <column name="message" value="Данной заявки не существует или она была удалена!"/>
+            <column name="external_id" value="-9000"/>
+        </insert>
+        <!--
+        -->
+        <insert tableName="external_codes" schemaName="space">
+            <column name="external_code" value="-9100"/>
+            <column name="message_ru" value="Доступ запрещен!"/>
+        </insert>
+        <insert tableName="internal_codes" schemaName="space">
+            <column name="internal_code" value="-11213"/>
+            <column name="message" value="Нет доступа к данной заявке!"/>
+            <column name="external_id" value="-9100"/>
         </insert>
 
         <rollback>

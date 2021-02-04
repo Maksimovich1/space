@@ -20,3 +20,11 @@ GET http://localhost:8081/api/request/all
 #}
 
 ###
+
+DELETE http://localhost:8081/api/requests/delete/9
+###
+DELETE http://localhost:8081/api/requests/delete/1
+###
+GET http://localhost:8081/api/requests/request/4
+
+###

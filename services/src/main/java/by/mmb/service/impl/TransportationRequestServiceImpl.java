@@ -44,7 +44,7 @@ public class TransportationRequestServiceImpl implements TransportationRequestSe
         this.securityService = securityService;
     }
 
-    @Transactional
+    @Transactional(rollbackFor = {RuntimeException.class, AppsException.class})
     @Override
     public long createNewRequest(@NonNull TransportationRequestDto dto) throws AppsException {
         if (dto.getCityTo() != dto.getCityFrom() &&
@@ -61,7 +61,7 @@ public class TransportationRequestServiceImpl implements TransportationRequestSe
                     .status(RequestStatus.OPEN)
                     .cargoId(idCargo)
                     .userId(securityService.getCurrentUser().getIdUser())
-                    .additionalParams(dto.getAdditionalParams())
+                    .additionalParam(dto.getAdditionalParams())
                     .build();
             return requestRepository.createRequest(request);
         }
@@ -74,8 +74,7 @@ public class TransportationRequestServiceImpl implements TransportationRequestSe
     }
 
     @Override
-    public boolean updateRequest(TransportationRequestDto dto) {
-        return false;
+    public void updateRequest(TransportationRequestDto dto) {
     }
 
     @Override
@@ -83,13 +82,38 @@ public class TransportationRequestServiceImpl implements TransportationRequestSe
         return false;
     }
 
+    @Transactional(rollbackFor = {RuntimeException.class, AppsException.class})
     @Override
-    public boolean deleteRequest(long id) {
-        return false;
+    public boolean deleteRequest(long idRequest) throws AppsException {
+        long idCurrentUser = securityService.getCurrentUser().getIdUser();
+        Request currentRequest = requestRepository.getRequestById(idRequest, false)
+                .orElseThrow(() -> new AppsException(() -> "Не найдена заявка c ид = " + idRequest, -11212, HttpStatus.BAD_REQUEST));
+
+        if (currentRequest.getUserId() != idCurrentUser) {
+            throw new AppsException(() -> "Переданная заяка не принадлежит данному пользователю!", -11213, HttpStatus.BAD_REQUEST);
+        }
+        int countRowDelete = requestRepository.changeStatus(idRequest, RequestStatus.DELETE);
+        if (countRowDelete != 1) {
+            throw new AppsException(() -> "Не удалось удалить заявку!");
+        }
+        return true;
     }
 
     @Override
     public List<Request> getAllRequest() {
         return null;
+    }
+
+    @Override
+    public TransportationRequestDto getRequestById(long idRequest) throws AppsException {
+        Request request = requestRepository.getRequestById(idRequest, false)
+                .orElseThrow(() -> new AppsException(() -> "Не найдена заявка c ид = " + idRequest, -11212, HttpStatus.BAD_REQUEST));
+        TransportationRequestDto requestDto = new TransportationRequestDto();
+        requestDto.setCargo(cargoRepository.getCargoById(request.getCargoId(), true));
+        requestDto.setCityFrom(request.getCityFrom());
+        requestDto.setCityTo(request.getCityTo());
+        requestDto.setCountKM(request.getCountKM());
+        requestDto.setAdditionalParams(request.getAdditionalParam());
+        return requestDto;
     }
 }

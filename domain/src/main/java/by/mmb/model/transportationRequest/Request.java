@@ -27,5 +27,5 @@ public class Request {
     private int countKM;
     @Setter(value = AccessLevel.PRIVATE) private LocalDateTime dateCreate;
     private LocalDateTime dateRefresh;
-    private List<AdditionalParam> additionalParams;
+    private AdditionalParam additionalParam;
 }

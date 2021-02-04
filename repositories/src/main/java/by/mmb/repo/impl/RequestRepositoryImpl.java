@@ -4,12 +4,16 @@ import by.mmb.HttpStatus;
 import by.mmb.enams.RequestStatus;
 import by.mmb.exception.AppsException;
 import by.mmb.exception.ExceptionUtility;
+import by.mmb.model.AdditionalParam;
 import by.mmb.model.transportationRequest.Request;
 import by.mmb.repo.RequestRepository;
 import by.mmb.repo.rowMapperCar.request.RequestRowMapper;
+import by.mmb.util.Pair;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -19,11 +23,14 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * @author andrew.maksimovich
  */
+@Slf4j
 @Repository
 public class RequestRepositoryImpl implements RequestRepository {
 
@@ -72,16 +79,54 @@ public class RequestRepositoryImpl implements RequestRepository {
     }
 
     @Override
-    public boolean changeStatus(long idRequest, RequestStatus status) {
+    public int changeStatus(long idRequest, @NonNull RequestStatus status) {
+        return jdbcTemplate.update(
+                "update space.request set analytic_value_id_status = ? where id = ?",
+                status.getCode(),
+                idRequest);
+    }
+
+    @Override
+    public Optional<Request> getRequestById(long id, boolean removed) {
+        Supplier<String> sql;
+        if (removed) {
+            sql = () -> "select id, user_id, cargo_id, city_from, city_to, count_km, analytic_value_id_status, date_reg, date_refresh  from  space.request where id = ?;";
+        } else {
+            sql = () -> "select id, user_id, cargo_id, city_from, city_to, count_km, analytic_value_id_status, date_reg, date_refresh  from  space.request where id = ? and analytic_value_id_status != 3;";
+        }
+        try {
+            Request request = jdbcTemplate.queryForObject(
+                    sql.get(),
+                    new RequestRowMapper(),
+                    id);
+            return Optional.ofNullable(request);
+        } catch (EmptyResultDataAccessException e) {
+            log.error(e.getMessage());
+            return Optional.empty();
+        }
+
+    }
+
+    @Override
+    public Optional<Request> getRequestByIdWithAdditionalParam(long idRequest) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<AdditionalParam> getAdditionalParamOfRequestById(long idRequest) {
+        return Optional.empty();
+    }
+
+    @Override
+    public boolean setParamOrUpdate(List<Pair<String, String>> listParams) {
         return false;
     }
 
     @Override
-    public Optional<Request> getRequestById(long id) {
-        Request request = jdbcTemplate.queryForObject(
-                "select id, user_id, cargo_id, city_from, city_to, count_km, analytic_value_id_status, date_reg, date_refresh  from  space.request where id = ?;",
-                new RequestRowMapper(),
-                id);
-        return Optional.ofNullable(request);
+    public int deleteRequestById(long idRequest) {
+        return jdbcTemplate.update(
+                "update space.request set analytic_value_id_status = ? where id = ?",
+                RequestStatus.DELETE.getCode(),
+                idRequest);
     }
 }

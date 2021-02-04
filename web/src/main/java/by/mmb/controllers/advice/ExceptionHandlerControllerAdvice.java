@@ -1,6 +1,8 @@
 package by.mmb.controllers.advice;
 
 import by.mmb.dto.response.ErrorBody;
+import by.mmb.dto.response.SpaceResponseModel;
+import by.mmb.dto.response.enums.Empty;
 import by.mmb.exception.AppsException;
 import by.mmb.exception.AutoAppsException;
 import lombok.NonNull;
@@ -29,7 +31,7 @@ public class ExceptionHandlerControllerAdvice {
     private int countSymbolsMessageWithError;
 
     @ExceptionHandler(value = {AppsException.class})
-    public ResponseEntity<ErrorBody> handleInvalidInputException(AppsException ex) {
+    public ResponseEntity<SpaceResponseModel<Empty>> handleInvalidInputException(AppsException ex) {
         String messageAboutError = ex.getRootCause() != null ? trimMessageToNeedSizeIfNeeded(ex.getRootCause().getMessage()) : "";
         ErrorBody err = ErrorBody.builder()
                 .message(ex.getErrorCode().getMessage())
@@ -40,11 +42,11 @@ public class ExceptionHandlerControllerAdvice {
                 .build();
         log.error(StringUtils.hasText(ex.getMessage()) ? ex.getMessage() : ex.getErrorCode().getMessage(), ex);
         HttpStatus status = resolverHttpStatus(ex.getHttpStatus());
-        return new ResponseEntity<>(err, status);
+        return new ResponseEntity<>(SpaceResponseModel.failOf(err), status);
     }
 
     @ExceptionHandler(value = {AutoAppsException.class})
-    public ResponseEntity<ErrorBody> handleInvalidInputException(AutoAppsException ex) {
+    public ResponseEntity<SpaceResponseModel<Empty>> handleInvalidInputException(AutoAppsException ex) {
         Throwable cause = ex.getRootCause();
         ErrorBody err = ErrorBody.builder()
                 .message(cause.getMessage())
@@ -54,7 +56,7 @@ public class ExceptionHandlerControllerAdvice {
                 .time(LocalDateTime.now())
                 .build();
         log.error(cause.getMessage(), cause);
-        return new ResponseEntity<>(err, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(SpaceResponseModel.failOf(err), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     /**

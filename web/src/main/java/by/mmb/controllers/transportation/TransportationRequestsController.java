@@ -2,8 +2,8 @@ package by.mmb.controllers.transportation;
 
 import by.mmb.controllers.advice.annotation.ExceptionHandlerProcessing;
 import by.mmb.dto.request.TransportationRequestDto;
+import by.mmb.dto.response.SpaceResponseModel;
 import by.mmb.exception.AppsException;
-import by.mmb.model.transportationRequest.Request;
 import by.mmb.service.TransportationRequestService;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * @author andrew.maksimovich
@@ -31,30 +30,52 @@ public class TransportationRequestsController {
         this.transportationRequestService = transportationRequestService;
     }
 
+
+    @ExceptionHandlerProcessing
+    @GetMapping("/request/{id}")
+    public ResponseEntity<SpaceResponseModel> getRequestById(@PathVariable("id") long idRequest) throws AppsException {
+        log.trace("Получение заявки по ид = " + idRequest);
+        TransportationRequestDto transportationRequestDto =
+                transportationRequestService.getRequestById(idRequest);
+        return new ResponseEntity<>(SpaceResponseModel.successOf(transportationRequestDto), HttpStatus.OK);
+
+    }
+
     @ExceptionHandlerProcessing
     @PostMapping("/request")
-    public ResponseEntity<Long> createTransReq(@RequestBody @NonNull TransportationRequestDto transportationRequestDto) throws AppsException {
+    public ResponseEntity<SpaceResponseModel> createTransReq(@RequestBody @NonNull TransportationRequestDto transportationRequestDto) throws AppsException {
         log.trace("Создание нового запроса: " + transportationRequestDto);
-        return new ResponseEntity<>(transportationRequestService.createNewRequest(transportationRequestDto), HttpStatus.CREATED);
+        long idNewRequest = transportationRequestService.createNewRequest(transportationRequestDto);
+        return new ResponseEntity<>(SpaceResponseModel.successOf(idNewRequest), HttpStatus.CREATED);
     }
 
     @ExceptionHandlerProcessing
     @PutMapping("/request")
-    public boolean updateTransReq(@RequestBody @NonNull TransportationRequestDto transportationRequestDto) {
-        return transportationRequestService.updateRequest(transportationRequestDto);
+    public ResponseEntity<SpaceResponseModel> updateTransReq(@RequestBody @NonNull TransportationRequestDto transportationRequestDto) {
+        log.trace("Обновление заявки: " + transportationRequestDto);
+        transportationRequestService.updateRequest(transportationRequestDto);
+        return new ResponseEntity<>(SpaceResponseModel.successOfEmptyBody(), HttpStatus.OK);
     }
 
     @ExceptionHandlerProcessing
     @PutMapping("/refresh/{id}")
-    public LocalDateTime refresh(@PathVariable long id) throws AppsException {
+    public ResponseEntity<SpaceResponseModel> refresh(@PathVariable long id) throws AppsException {
         log.trace("Обновление: " + id + " refresh!");
-        return transportationRequestService.refreshUpRequest(id);
+        LocalDateTime localDateTime = transportationRequestService.refreshUpRequest(id);
+        return new ResponseEntity<>(SpaceResponseModel.successOf(localDateTime), HttpStatus.OK);
     }
 
     @ExceptionHandlerProcessing
     @GetMapping("/all")
-    public List<Request> requests() {
-        return transportationRequestService.getAllRequest();
+    public ResponseEntity<Object /*TODO PAGEABLE object*/> requests() {
+        return new ResponseEntity<>(transportationRequestService.getAllRequest(), HttpStatus.OK);
+    }
+
+    @ExceptionHandlerProcessing
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<SpaceResponseModel> deleteById(@PathVariable("id") long id) throws AppsException {
+        boolean statusOfDelete = transportationRequestService.deleteRequest(id);
+        return new ResponseEntity<>(SpaceResponseModel.successOf(statusOfDelete), HttpStatus.OK);
     }
 
 }

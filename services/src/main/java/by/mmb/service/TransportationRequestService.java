@@ -17,11 +17,13 @@ public interface TransportationRequestService {
 
     LocalDateTime refreshUpRequest(long id) throws AppsException;
 
-    boolean updateRequest(TransportationRequestDto dto);
+    void updateRequest(TransportationRequestDto dto);
 
     boolean changeStatusOfRequest(RequestStatus status);
 
-    boolean deleteRequest(long id);
+    boolean deleteRequest(long id) throws AppsException;
 
     List<Request> getAllRequest();
+
+    TransportationRequestDto getRequestById(long idRequest) throws AppsException;
 }
