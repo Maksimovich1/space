@@ -2,7 +2,6 @@ package by.mmb.controllers.advice;
 
 import by.mmb.dto.response.ErrorBody;
 import by.mmb.dto.response.SpaceResponseModel;
-import by.mmb.dto.response.enums.Empty;
 import by.mmb.exception.AppsException;
 import by.mmb.exception.AutoAppsException;
 import lombok.NonNull;
@@ -31,7 +30,7 @@ public class ExceptionHandlerControllerAdvice {
     private int countSymbolsMessageWithError;
 
     @ExceptionHandler(value = {AppsException.class})
-    public ResponseEntity<SpaceResponseModel<Empty>> handleInvalidInputException(AppsException ex) {
+    public ResponseEntity<SpaceResponseModel> handleInvalidInputException(AppsException ex) {
         String messageAboutError = ex.getRootCause() != null ? trimMessageToNeedSizeIfNeeded(ex.getRootCause().getMessage()) : "";
         ErrorBody err = ErrorBody.builder()
                 .message(ex.getErrorCode().getMessage())
@@ -46,7 +45,7 @@ public class ExceptionHandlerControllerAdvice {
     }
 
     @ExceptionHandler(value = {AutoAppsException.class})
-    public ResponseEntity<SpaceResponseModel<Empty>> handleInvalidInputException(AutoAppsException ex) {
+    public ResponseEntity<SpaceResponseModel> handleInvalidInputException(AutoAppsException ex) {
         Throwable cause = ex.getRootCause();
         ErrorBody err = ErrorBody.builder()
                 .message(cause.getMessage())

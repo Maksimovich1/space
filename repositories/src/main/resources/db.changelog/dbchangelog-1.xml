@@ -33,7 +33,8 @@
             <column name="code_analytic_type" type="int">
                 <constraints nullable="false"
                              foreignKeyName="fk_analytic_value_analytic_type"
-                             references="analytic_type(code_analytic_type)"/>
+                             references="analytic_type(code_analytic_type)"
+                             deleteCascade="true"/>
             </column>
             <column name="code_analytic_value" type="int">
                 <constraints nullable="false" />
@@ -72,10 +73,10 @@
             </column>
             <column name="analytic_value_id_status" type="INT"
                     remarks="Статус в котором находится пользователь аналитика тип статуса аккаунта">
-                <constraints nullable="false"
-                             foreignKeyName="fk_users_analytic_value_id_status"
-                             references="analytic_value(code_analytic_value)"
-                />
+                <constraints nullable="false"/>
+<!--                             foreignKeyName="fk_users_analytic_value_id_status"-->
+<!--                             references="analytic_value(code_analytic_value)"-->
+<!--                />-->
             </column>
             <column name="login" type="varchar(255)" remarks="Логин пользователя в системе. Должен быть уникален">
                 <constraints unique="true" nullable="false"/>
@@ -84,10 +85,10 @@
                 <constraints nullable="false"/>
             </column>
             <column name="analytic_value_id_type" type="int" remarks="аналитика Тип аккаунта ">
-                <constraints nullable="false"
-                             foreignKeyName="fk_users_analytic_value_id_type"
-                             references="analytic_value(code_analytic_value)"
-                />
+                <constraints nullable="false"/>
+<!--                             foreignKeyName="fk_users_analytic_value_id_type"-->
+<!--                             references="analytic_value(code_analytic_value)"-->
+<!--                />-->
             </column>
 
         </createTable>
@@ -97,22 +98,22 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="analytic_value_id_brand" type="int" remarks="аналитика Бренд машины">
-                <constraints nullable="false"
-                             foreignKeyName="fk_cars_analytic_value_id_brand"
-                             references="analytic_value(code_analytic_value)"
-                />
+                <constraints nullable="false"/>
+<!--                             foreignKeyName="fk_cars_analytic_value_id_brand"-->
+<!--                             references="analytic_value(code_analytic_value)"-->
+<!--                />-->
             </column>
             <column name="analytic_value_id_model" type="int" remarks="аналитика Модель машины">
-                <constraints nullable="false"
-                             foreignKeyName="fk_cars_analytic_value_id_model"
-                             references="analytic_value(code_analytic_value)"
-                />
+                <constraints nullable="false"/>
+<!--                             foreignKeyName="fk_cars_analytic_value_id_model"-->
+<!--                             references="analytic_value(code_analytic_value)"-->
+<!--                />-->
             </column>
             <column name="analytic_value_id_status" type="int" remarks="аналитика Статус доступа автомобиля">
-                <constraints nullable="false"
-                             foreignKeyName="fk_cars_analytic_value_id_status"
-                             references="analytic_value(code_analytic_value)"
-                />
+                <constraints nullable="false"/>
+<!--                             foreignKeyName="fk_cars_analytic_value_id_status"-->
+<!--                             references="analytic_value(code_analytic_value)"-->
+<!--                />-->
             </column>
             <column name="number_car" type="varchar(255)" remarks="Номер машины, должен быть уникальным">
                 <constraints nullable="false" unique="true"/>

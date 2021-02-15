@@ -3,7 +3,7 @@ package by.mmb.controllers.transportation;
 import by.mmb.dto.request.TransportationRequestDto;
 import by.mmb.dto.response.ErrorBody;
 import by.mmb.dto.response.SpaceResponseModel;
-import by.mmb.dto.response.enums.Empty;
+import by.mmb.dto.response.enums.ConstResponse;
 import by.mmb.model.AdditionalParam;
 import by.mmb.model.transportationRequest.Cargo;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -209,7 +209,7 @@ class TransportationRequestsControllerTest {
         Assert.assertEquals(-9000, errorBody.getCode());
         Assert.assertNotNull(errorBody);
 
-        Empty responseBody = objectMapper.convertValue(body.getResponseBody(), new TypeReference<>() {
+        ConstResponse responseBody = objectMapper.convertValue(body.getResponseBody(), new TypeReference<>() {
         });
         Assert.assertNotNull(responseBody);
 

@@ -1,14 +1,15 @@
 package by.mmb.dto.response.enums;
 
 /**
+ * Служебные константы
  * @author andrew.maksimovich
  */
-public enum Empty {
-    INSTANCE("EMPTY");
+public enum ConstResponse {
+    EMPTY("EMPTY");
 
     private String value;
 
-    Empty(String value) {
+    ConstResponse(String value) {
         this.value = value;
     }
 }

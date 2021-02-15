@@ -31,9 +31,9 @@
             </column>
             <column name="analytic_value_id_district" type="INT"
                     remarks="Область, если это районыый город то район не указывается">
-                <constraints nullable="true"
-                             foreignKeyName="FK_city_analytic_value_id"
-                             references="analytic_value(code_analytic_value)"/>
+                <constraints nullable="true"/>
+<!--                             foreignKeyName="FK_city_analytic_value_id"-->
+<!--                             references="analytic_value(code_analytic_value)"/>-->
             </column>
             <column name="latitude" type="varchar(255)">
                 <constraints nullable="true"/>
@@ -73,9 +73,9 @@
                 <constraints nullable="true"/>
             </column>
             <column name="analytic_value_id_status" type="int" remarks="analytic 900">
-                <constraints nullable="false"
-                             foreignKeyName="FK_request_analytic_value_id_status"
-                             references="analytic_value(code_analytic_value)"/>
+                <constraints nullable="false"/>
+<!--                             foreignKeyName="FK_request_analytic_value_id_status"-->
+<!--                             references="analytic_value(code_analytic_value)"/>-->
             </column>
             <column name="date_reg" type="DATETIME(3)" defaultValueDate="NOW(3)">
                 <constraints nullable="false"/>

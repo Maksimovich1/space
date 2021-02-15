@@ -28,3 +28,6 @@ DELETE http://localhost:8081/api/requests/delete/1
 GET http://localhost:8081/api/requests/request/4
 
 ###
+GET http://localhost:8081/api/dictionaries/dictionary/500
+
+###
